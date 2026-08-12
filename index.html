@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html class="light" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RELEXIA - 가장 깊은 휴식이 삶의 가치를 만든다</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&amp;family=Noto+Serif+KR:wght@300;400;500;600;700&amp;family=Manrope:wght@400;600;700;800;900&amp;family=Montserrat:wght@800;900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-fixed": "#1c1c19",
+                        "primary-fixed": "#dae5da",
+                        "on-secondary-fixed": "#241a0e",
+                        "primary-fixed-dim": "#bec9be",
+                        "on-primary-container": "#949f94",
+                        "surface-container-low": "#faf2ec",
+                        "surface-container-highest": "#e9e1db",
+                        "error-container": "#ffdad6",
+                        "outline": "#747873",
+                        "on-primary-fixed-variant": "#3f4941",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#bec9be",
+                        "tertiary": "#1f1f1c",
+                        "inverse-surface": "#33302c",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#f4dfcb",
+                        "on-tertiary-fixed-variant": "#474743",
+                        "inverse-on-surface": "#f7efe9",
+                        "surface-dim": "#e0d9d2",
+                        "secondary-fixed-dim": "#d7c3b0",
+                        "outline-variant": "#c4c8c2",
+                        "on-secondary": "#ffffff",
+                        "on-surface": "#1e1b17",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#e5e2dd",
+                        "on-background": "#1e1b17",
+                        "surface": "#fff8f3",
+                        "surface-variant": "#e9e1db",
+                        "primary-container": "#2c362e",
+                        "on-primary-fixed": "#141e17",
+                        "on-secondary-fixed-variant": "#524436",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#9e9c98",
+                        "background": "#fff8f3",
+                        "surface-tint": "#566158",
+                        "on-secondary-container": "#716252",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#c9c6c2",
+                        "surface-bright": "#fff8f3",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#434843",
+                        "surface-container-high": "#efe7e0",
+                        "secondary-container": "#f4dfcb",
+                        "surface-container": "#f4ece6",
+                        "primary": "#172119",
+                        "tertiary-container": "#343431",
+                        "secondary": "#6b5c4c"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "section-gap": "120px",
+                        "margin-desktop": "80px",
+                        "unit": "8px",
+                        "container-max": "1440px"
+                    },
+                    fontFamily: {
+                        "display-lg": ["EB Garamond"],
+                        "body-lg": ["Manrope"],
+                        "headline-sm": ["EB Garamond"],
+                        "headline-md": ["EB Garamond"],
+                        "body-md": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "display-lg-mobile": ["EB Garamond"]
+                    },
+                    fontSize: {
+                        "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "400" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "headline-sm": ["24px", { lineHeight: "1.4", fontWeight: "500" }],
+                        "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "400" }],
+                        "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+                        "label-caps": ["12px", { lineHeight: "1.2", letterSpacing: "0.1em", fontWeight: "600" }],
+                        "display-lg-mobile": ["40px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        html { scroll-behavior: smooth; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+
+        /* Accordion Gallery Component Styles */
+        .accordion-gallery {
+          --ag-accent: #ffffff;
+          --ag-overlay: #172119;
+          --ag-text: #ffffff;
+          --ag-gap: 14px;
+          --ag-radius: 16px;
+          --ag-media-size: 320px;
+
+          display: flex;
+          flex-direction: row;
+          gap: var(--ag-gap);
+          width: 100%;
+          max-width: 100%;
+          perspective: 1400px;
+          perspective-origin: 50% 50%;
+        }
+
+        .accordion-gallery--vertical {
+          flex-direction: column;
+        }
+
+        .ag-panel {
+          position: relative;
+          flex: 1 1 0;
+          min-width: 0;
+          min-height: 0;
+          overflow: hidden;
+          border-radius: var(--ag-radius);
+          cursor: pointer;
+          display: block;
+          text-decoration: none;
+          outline: none;
+          transform-style: preserve-3d;
+          transform-origin: center center;
+          background: #172119;
+          box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.4);
+          will-change: flex-grow, transform;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        .ag-panel:focus-visible {
+          box-shadow:
+            0 0 0 2px var(--ag-accent),
+            0 16px 40px -16px rgba(0, 0, 0, 0.4);
+        }
+
+        .ag-panel__frame {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          border-radius: inherit;
+        }
+
+        .ag-panel__media {
+          --ag-gray: 0;
+          --ag-dim: 0.25;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: var(--ag-media-size);
+          height: 100%;
+          filter: grayscale(var(--ag-gray));
+          will-change: transform, filter;
+        }
+
+        .accordion-gallery--vertical .ag-panel__media {
+          width: 100%;
+          height: var(--ag-media-size);
+        }
+
+        .ag-panel__media img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: 28% 85%;
+          display: block;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+
+        .ag-panel__overlay {
+          display: none;
+        }
+
+        .ag-panel__label {
+          position: absolute;
+          left: 28px;
+          bottom: 28px;
+          right: 28px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          pointer-events: none;
+          z-index: 2;
+        }
+
+        .ag-panel__bar {
+          flex: 0 0 auto;
+          width: 3px;
+          height: 28px;
+          border-radius: 3px;
+          background: var(--ag-accent);
+          opacity: 0;
+          box-shadow: 0 0 12px color-mix(in srgb, var(--ag-accent) 60%, transparent);
+        }
+
+        .ag-panel__text {
+          color: var(--ag-text);
+          font-family: 'EB Garamond', serif;
+          font-weight: 500;
+          font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+          letter-spacing: 0.02em;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          opacity: 0;
+          text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+        }
+
+        @media (max-width: 640px) {
+          .accordion-gallery {
+            flex-direction: column !important;
+            perspective: none !important;
+            height: 100% !important;
+            gap: 12px !important;
+          }
+          .ag-panel {
+            width: 100% !important;
+            min-height: 80px !important;
+            flex-basis: 0 !important;
+            transform: none !important;
+          }
+          .ag-panel .ag-panel__frame {
+            width: 100% !important;
+            height: 100% !important;
+          }
+          .accordion-gallery .ag-panel__media {
+            width: 100% !important;
+            height: 100% !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+          }
+          .accordion-gallery .ag-panel__media img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+          }
+          .ag-panel__label {
+            left: 20px !important;
+            bottom: 20px !important;
+            font-size: 16px !important;
+          }
+        }
+
+        /* ScrollExpand Component Styles */
+        .scroll-expand {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+
+        .scroll-expand--scroller {
+          overflow-y: auto;
+          overflow-x: hidden;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+          overscroll-behavior: contain;
+        }
+
+        .scroll-expand--scroller::-webkit-scrollbar {
+          display: none;
+        }
+
+        .scroll-expand__track {
+          position: relative;
+          width: 100%;
+        }
+
+        .scroll-expand__stage {
+          position: sticky;
+          top: 0;
+          width: 100%;
+          overflow: hidden;
+          --se-title-size: 4.5rem;
+        }
+
+        .scroll-expand__frame {
+          position: absolute;
+          inset: 0;
+          clip-path: inset(17.5% 25% 17.5% 25% round 24px);
+          will-change: clip-path;
+        }
+
+        .scroll-expand__media {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          will-change: transform;
+          transform-origin: center;
+          user-select: none;
+          -webkit-user-drag: none;
+        }
+
+        .scroll-expand__scrim {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background: #000000;
+          opacity: 0;
+        }
+
+        .scroll-expand__overlay {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 6%;
+          opacity: 0;
+          will-change: opacity, transform;
+        }
+
+        .scroll-expand__title {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          padding: 0 6%;
+          text-align: center;
+          font-family: 'EB Garamond', serif;
+          font-size: var(--se-title-size);
+          font-weight: 400;
+          letter-spacing: 0.05em;
+          line-height: 1;
+          color: #fff;
+          text-shadow: 0 4px 30px rgba(0, 0, 0, 0.65);
+          pointer-events: none;
+          will-change: opacity, transform;
+        }
+
+        .scroll-expand__hint {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 2rem;
+          text-align: center;
+          font-size: 0.85rem;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.8);
+          pointer-events: none;
+          will-change: opacity, transform;
+        }
+
+        /* ScrollStack GPU Sticky Architecture */
+        .scroll-stack-wrapper {
+          max-width: 1600px;
+          margin: 0 auto;
+          padding: 20px 2rem 140px;
+          position: relative;
+        }
+
+        .scroll-stack-card {
+          position: sticky;
+          top: 100px;
+          height: 650px;
+          width: 100%;
+          border-radius: 32px;
+          overflow: hidden;
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+          background: #172119;
+          margin-bottom: 160px;
+          transform-origin: center top;
+          will-change: transform, filter;
+          transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), filter 0.25s ease;
+        }
+
+        .scroll-stack-card:nth-child(1) {
+          top: 90px;
+          z-index: 10;
+        }
+
+        .scroll-stack-card:nth-child(2) {
+          top: 125px;
+          z-index: 20;
+        }
+
+        .scroll-stack-card:nth-child(3) {
+          top: 160px;
+          z-index: 30;
+        }
+
+        @media (max-width: 768px) {
+          .scroll-stack-wrapper {
+            padding: 10px 1rem 100px;
+          }
+          .scroll-stack-card {
+            height: 460px;
+            border-radius: 20px;
+            margin-bottom: 100px;
+          }
+          .scroll-stack-card:nth-child(1) { top: 80px; }
+          .scroll-stack-card:nth-child(2) { top: 110px; }
+          .scroll-stack-card:nth-child(3) { top: 140px; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-lg antialiased">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-transparent transition-colors duration-300">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-display-lg text-[22px] sm:text-2xl md:text-3xl text-primary dark:text-primary-fixed tracking-tight font-bold">RELEXIA</span>
+</div>
+<div class="hidden md:flex gap-8 items-center font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#collections">Collections</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#craftsmanship">Craftsmanship</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#gallery">Gallery</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#showroom">Showroom</a>
+</div>
+</div>
+</nav>
+<!-- Hero Banner Header with Accordion Gallery -->
+<header class="relative w-full h-screen pt-20 pb-6 px-margin-mobile md:px-margin-desktop bg-surface flex flex-col justify-center items-center overflow-hidden">
+<!-- Top Brand Watermark Logo -->
+<div class="absolute top-24 sm:top-32 md:top-[296px] left-1/2 -translate-x-1/2 z-20 text-center select-none pointer-events-none w-full px-4">
+<h1 class="font-display-lg text-[36px] sm:text-[70px] md:text-[110px] lg:text-[140px] text-primary/25 tracking-[0.06em] uppercase font-normal leading-none">RELEXIA</h1>
+</div>
+<!-- Accordion Gallery Container -->
+<div class="relative z-10 w-full max-w-[1800px] h-[calc(100vh-120px)] mx-auto">
+<div id="hero-accordion-gallery" class="h-full"></div>
+</div>
+</header>
+<!-- About RELEXIA -->
+<section class="min-h-0 md:min-h-screen pt-10 pb-[70px] sm:py-14 md:py-[240px] px-margin-mobile md:px-margin-desktop bg-surface-container-lowest flex items-center justify-center">
+<div class="max-w-[1600px] w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center">
+<div class="relative w-full flex items-center justify-center mt-0 md:-mt-16 z-10">
+<div class="relative w-full h-[260px] sm:h-[360px] md:h-[680px] overflow-hidden flex items-center justify-center rounded-sm">
+<!-- 7010.png -->
+<img id="sofa-img-1" alt="RELEXIA Sofa 7010" class="absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out translate-y-0 opacity-100" src="images/7010.png">
+<!-- 7648.png -->
+<img id="sofa-img-2" alt="RELEXIA Sofa 7648" class="absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out -translate-y-full opacity-0" src="images/7648.png">
+</div>
+<div class="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
+<button aria-label="Sofa 1" class="w-3 h-8 bg-primary rounded-full transition-all duration-300 shadow-sm" id="sofa-btn-0" onclick="switchSofa(0)"></button>
+<button aria-label="Sofa 2" class="w-3 h-3 bg-primary/30 rounded-full transition-all duration-300 hover:bg-primary/60 shadow-sm" id="sofa-btn-1" onclick="switchSofa(1)"></button>
+</div>
+</div>
+<div class="text-left space-y-6 md:space-y-8 pl-4 md:pl-12 lg:pl-16">
+  <div class="space-y-2 md:space-y-3">
+    <h2 class="font-display-lg text-5xl sm:text-6xl md:text-7xl lg:text-[88px] text-primary font-normal leading-none mb-0 reveal-on-scroll opacity-0 translate-y-12 transition-all duration-[1500ms] delay-0 ease-out">Relax + Axia</h2>
+    <h3 class="font-headline-md text-2xl sm:text-3xl md:text-4xl text-primary font-normal reveal-on-scroll opacity-0 translate-y-12 transition-all duration-[1500ms] delay-[400ms] ease-out">휴식을 가치로 승화하다</h3>
+  </div>
+  <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed text-lg md:text-xl reveal-on-scroll opacity-0 translate-y-12 transition-all duration-[1500ms] delay-[800ms] ease-out">
+    단순히 앉는 가구를 넘어, 당신의 삶에 가장 온전한 비움의 시간을 선사합니다.<br>프리미엄 소재와 인체공학적 설계가 만나 완성되는 진정한 쉼의 미학을 경험해보세요.
+  </p>
+</div>
+</div>
+</section><!-- Craftsmanship Sticky Split Scroll Section -->
+<section class="relative w-full h-[220vh] bg-surface" id="about">
+  <div class="sticky top-0 w-full h-screen overflow-hidden bg-surface flex items-center">
+    <!-- Image Column Wrapper -->
+    <div class="craft-split-img-wrapper absolute top-1/2 -translate-y-1/2 left-0 w-full h-full overflow-hidden transition-none z-10 shadow-2xl">
+      <!-- Unscrolled Image 1 -->
+      <img src="images/close-up-cobbler-working-with-leather-textile.jpg" alt="RELEXIA Craftsmanship 1" class="craft-img-1 absolute inset-0 w-full h-full object-cover select-none transition-none opacity-100" />
+      <!-- Scrolled Image 2 -->
+      <img src="images/close-up-shoemaker-cutting-leather.jpg" alt="RELEXIA Craftsmanship 2" class="craft-img-2 absolute inset-0 w-full h-full object-cover select-none transition-none opacity-0" />
+      <!-- 70% Black Opacity Overlay that fades out -->
+      <div class="craft-split-overlay absolute inset-0 bg-black opacity-70 z-10 pointer-events-none"></div>
+    </div>
+
+    <!-- Text Column Wrapper -->
+    <div class="craft-split-text-wrapper absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 text-center px-4 w-full max-w-none">
+      <h2 class="craft-split-headline font-sans font-bold text-white text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl tracking-tight leading-[1.75] select-none whitespace-nowrap">
+        <span>최고급 원단으로</span><br class="craft-br hidden"><span class="craft-space"> </span><span>최고의 장인이 만듭니다.</span>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="py-[50px] md:py-section-gap px-margin-mobile md:px-margin-desktop bg-surface-container-lowest" id="collections">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-10">
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary">Signature Collections</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
+<!-- Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
+<img alt="RELEXIA Olive Lounge Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/7010.png">
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
+<h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Olive Lounge</h3>
+<span class="font-headline-sm text-xs sm:text-sm md:text-base text-primary font-semibold whitespace-nowrap">₩ 3,850,000</span>
+</div>
+<p class="hidden sm:block font-body-md text-body-md text-on-surface-variant text-xs md:text-sm line-clamp-1">인체공학적 착좌감의 프리미엄 올리브 라인</p>
+</div>
+
+<!-- Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
+<img alt="RELEXIA Classic Soft Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/7648.png">
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
+<h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Classic Soft</h3>
+<span class="font-headline-sm text-xs sm:text-sm md:text-base text-primary font-semibold whitespace-nowrap">₩ 2,980,000</span>
+</div>
+<p class="hidden sm:block font-body-md text-body-md text-on-surface-variant text-xs md:text-sm line-clamp-1">최상급 친환경 패브릭 샌드 베이지 라인</p>
+</div>
+
+<!-- Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
+<img alt="RELEXIA Modern Velvet Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/0addfb45-bbe7-4a8b-885d-a50bfa5369d6.png">
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
+<h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Modern Velvet</h3>
+<span class="font-headline-sm text-xs sm:text-sm md:text-base text-primary font-semibold whitespace-nowrap">₩ 3,450,000</span>
+</div>
+<p class="hidden sm:block font-body-md text-body-md text-on-surface-variant text-xs md:text-sm line-clamp-1">부드러운 실크 벨벳 텍스처 3인용 소파</p>
+</div>
+
+<!-- Card 4 -->
+<div class="group cursor-pointer">
+<div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
+<img alt="RELEXIA Minimal Studio Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/3d4c42d6-2249-48a3-9418-63fedf3379e5.png">
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
+<h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Minimal Studio</h3>
+<span class="font-headline-sm text-xs sm:text-sm md:text-base text-primary font-semibold whitespace-nowrap">₩ 4,200,000</span>
+</div>
+<p class="hidden sm:block font-body-md text-body-md text-on-surface-variant text-xs md:text-sm line-clamp-1">공간감을 극대화하는 미니멀 스튜디오 스페셜</p>
+</div>
+
+<!-- Card 5 -->
+<div class="group cursor-pointer">
+<div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
+<img alt="RELEXIA Leather Module Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/9ee509ab-19ba-4847-be4b-06d9867d2d5b.png">
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
+<h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Leather Module</h3>
+<span class="font-headline-sm text-xs sm:text-sm md:text-base text-primary font-semibold whitespace-nowrap">₩ 5,100,000</span>
+</div>
+<p class="hidden sm:block font-body-md text-body-md text-on-surface-variant text-xs md:text-sm line-clamp-1">이탈리아 풀그레인 천연 가죽 모듈</p>
+</div>
+
+<!-- Card 6 -->
+<div class="group cursor-pointer">
+<div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
+<img alt="RELEXIA Natural Comfort Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/e541553d-9472-406c-b048-95709a69bbb6.png">
+</div>
+<div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
+<h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Natural Comfort</h3>
+<span class="font-headline-sm text-xs sm:text-sm md:text-base text-primary font-semibold whitespace-nowrap">₩ 3,150,000</span>
+</div>
+<p class="hidden sm:block font-body-md text-body-md text-on-surface-variant text-xs md:text-sm line-clamp-1">자연 친화적 린넨 코튼 믹스 모듈형 소파</p>
+</div>
+</div>
+<div class="mt-14 md:mt-16 text-center">
+<button class="bg-primary text-on-primary px-10 py-4 font-label-caps text-label-caps text-sm uppercase tracking-widest hover:opacity-90 transition-all rounded-sm shadow-sm">MORE VIEW</button>
+</div>
+</div>
+</section>
+<!-- Showroom Section with ScrollExpand Component -->
+<section class="w-full bg-surface" id="showroom">
+<div id="showroom-scroll-expand" class="w-full"></div>
+</section>
+<!-- Full-Bleed 2-Column Split Section matching Reference Image -->
+<section id="brand-philosophy" class="relative w-full bg-surface dark:bg-background overflow-hidden">
+  <div class="w-full grid grid-cols-1 lg:grid-cols-2 min-h-[500px] lg:min-h-[680px] items-stretch">
+    
+    <!-- Left Column: Full-Bleed Image (Left-to-Right 2.5s Slow-Motion Scroll Reveal) -->
+    <div id="brand-image-frame" class="relative w-full h-[420px] sm:h-[520px] lg:h-full min-h-full overflow-hidden group reveal-left-on-scroll opacity-0 -translate-x-16 transition-all duration-[2500ms] ease-out" style="transition-duration: 2500ms;">
+      <img src="images/dada_design-bqiKlANLuAY-unsplash.jpg" alt="RELEXIA Interior Space" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+      <div class="absolute inset-0 bg-black/10 transition-opacity duration-500"></div>
+    </div>
+
+    <!-- Right Column: Korean Text directly above Large English Scroll Velocity Text (Absolute Bottom Flush) -->
+    <div class="flex flex-col justify-end h-full pt-12 lg:pt-16 pb-0 space-y-6 lg:space-y-8">
+      
+      <!-- Top: Korean Text (Center Aligned on Mobile, Left Aligned on Desktop) -->
+      <div class="space-y-4 sm:space-y-6 text-center lg:text-left mx-auto lg:mx-0 max-w-2xl px-6 sm:px-10 lg:px-14 reveal-on-scroll opacity-0 translate-y-12 transition-all duration-[2000ms] ease-out delay-[1000ms]" style="transition-duration: 2000ms; transition-delay: 1000ms;">
+        <h2 class="font-['Manrope',sans-serif] font-bold text-3xl sm:text-4xl lg:text-[52px] text-primary tracking-tight" style="line-height: 1.3 !important;">
+          가장 깊은 휴식이<br>삶의 가치를 만든다.
+        </h2>
+        <p class="font-['Manrope',sans-serif] text-base sm:text-lg text-on-surface-variant font-normal leading-relaxed opacity-90">
+          당신의 일상에 비워지는 가장 깊은 휴식,<br class="block lg:hidden"> RELEXIA가 제안합니다.
+        </p>
+      </div>
+
+      <!-- Bottom Right: Large Scroll Velocity English Text (Flush to Absolute Bottom Edge) -->
+      <div id="scroll-velocity-wrapper" class="w-full space-y-0 select-none pointer-events-none pt-4 pb-0">
+        
+        <!-- Line 1: Moves Left to Right (좌에서 우로) -->
+        <div class="w-full overflow-hidden whitespace-nowrap">
+          <div id="velocity-line-1" class="inline-block font-['Manrope',sans-serif] font-bold text-[clamp(38px,6.5vw,115px)] uppercase tracking-tight text-[#f4ece6] dark:text-[#efe7e0] leading-[0.8] whitespace-nowrap will-change-transform">
+            <span>THE DEEPEST REST BUILDS &nbsp;•&nbsp; THE DEEPEST REST BUILDS &nbsp;•&nbsp; </span>
+          </div>
+        </div>
+
+        <!-- Line 2: Moves Right to Left (우에서 좌로) (Pushed down flush to absolute bottom edge) -->
+        <div class="w-full overflow-hidden whitespace-nowrap">
+          <div id="velocity-line-2" class="inline-block font-['Manrope',sans-serif] font-bold text-[clamp(38px,6.5vw,115px)] uppercase tracking-tight text-[#f4ece6] dark:text-[#efe7e0] leading-[0.8] whitespace-nowrap will-change-transform translate-y-6 lg:translate-y-12">
+            <span>THE TRUE VALUE OF LIFE &nbsp;•&nbsp; THE TRUE VALUE OF LIFE &nbsp;•&nbsp; </span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+<footer class="bg-surface-container dark:bg-surface-container-high w-full mt-0">
+<div class="flex flex-col md:flex-row justify-between items-start gap-8 md:gap-gutter px-margin-mobile md:px-margin-desktop py-12 md:py-section-gap max-w-container-max mx-auto">
+<div>
+<div class="font-display-lg text-headline-sm text-primary dark:text-primary-fixed mb-4">RELEXIA</div>
+<p class="font-body-md text-body-md text-on-surface dark:text-on-surface-variant opacity-80 hover:opacity-100 transition-opacity">
+                    © 2024 RELEXIA. All rights reserved.
+                </p>
+</div>
+<div class="flex flex-col md:flex-row gap-4 md:gap-8 font-body-md text-body-md">
+<a class="text-on-surface dark:text-on-surface-variant hover:underline decoration-primary transition-all" href="#">Privacy Policy</a>
+<a class="text-on-surface dark:text-on-surface-variant hover:underline decoration-primary transition-all" href="#">Terms of Service</a>
+<a class="text-on-surface dark:text-on-surface-variant hover:underline decoration-primary transition-all" href="#">Shipping &amp; Returns</a>
+<a class="text-on-surface dark:text-on-surface-variant hover:underline decoration-primary transition-all" href="#">Contact Us</a>
+</div>
+</div>
+</footer>
+<!-- Floating Action Button -->
+
+
+<script>
+  let currentHeroSlide = 0;
+  function setHeroSlide(index) {
+    currentHeroSlide = index;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    slides.forEach((slide, i) => {
+      if (i === index) {
+        slide.classList.remove('opacity-0');
+        slide.classList.add('opacity-100');
+      } else {
+        slide.classList.remove('opacity-100');
+        slide.classList.add('opacity-0');
+      }
+    });
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.className = 'hero-dot w-8 h-1 bg-primary/80 rounded-full transition-all duration-300';
+      } else {
+        dot.className = 'hero-dot w-3 h-1 bg-primary/30 rounded-full transition-all duration-300 hover:bg-primary/60';
+      }
+    });
+  }
+  setInterval(() => {
+    const slides = document.querySelectorAll('.hero-slide');
+    if (slides.length > 0) {
+      setHeroSlide((currentHeroSlide + 1) % slides.length);
+    }
+  }, 5000);
+
+  let currentSofaIndex = 0;
+  function switchSofa(index) {
+    if (currentSofaIndex === index) return;
+    const img1 = document.getElementById('sofa-img-1');
+    const img2 = document.getElementById('sofa-img-2');
+    const btn0 = document.getElementById('sofa-btn-0');
+    const btn1 = document.getElementById('sofa-btn-1');
+
+    if (index === 1) {
+      // 7010 slides down
+      img1.className = 'absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out translate-y-full opacity-0';
+      // 7648 slides down from top into place
+      img2.className = 'absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out translate-y-0 opacity-100';
+      btn0.className = 'w-3 h-3 bg-primary/30 rounded-full transition-all duration-300 hover:bg-primary/60 shadow-sm';
+      btn1.className = 'w-3 h-8 bg-primary rounded-full transition-all duration-300 shadow-sm';
+    } else {
+      // 7648 slides down
+      img2.className = 'absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out translate-y-full opacity-0';
+      // 7010 slides down from top into place
+      img1.className = 'absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out translate-y-0 opacity-100';
+      btn1.className = 'w-3 h-3 bg-primary/30 rounded-full transition-all duration-300 hover:bg-primary/60 shadow-sm';
+      btn0.className = 'w-3 h-8 bg-primary rounded-full transition-all duration-300 shadow-sm';
+    }
+    currentSofaIndex = index;
+  }
+
+  setInterval(() => {
+    switchSofa((currentSofaIndex + 1) % 2);
+  }, 4000);
+
+
+
+  // Craftsmanship Sticky Split Scroll Section with Smooth rAF Lerp Ticker
+  function initCraftSplit(section) {
+    if (!section) return;
+    const imgWrapper = section.querySelector('.craft-split-img-wrapper');
+    const img1 = section.querySelector('.craft-img-1');
+    const img2 = section.querySelector('.craft-img-2');
+    const overlay = section.querySelector('.craft-split-overlay');
+    const textWrapper = section.querySelector('.craft-split-text-wrapper');
+    const headline = section.querySelector('.craft-split-headline');
+
+    let currentP = 0;
+    let targetP = 0;
+    let animFrame = null;
+
+    const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+    const smoothstep = (e0, e1, x) => {
+      const t = clamp((x - e0) / (e1 - e0 || 1e-6), 0, 1);
+      return t * t * (3 - 2 * t);
+    };
+
+    const updateDOM = (p) => {
+      const e = smoothstep(0, 1, p);
+      const isMobile = window.innerWidth < 768;
+
+      // 1. Smooth Fade out 70% black overlay
+      if (overlay) {
+        overlay.style.opacity = `${0.7 * (1 - e)}`;
+      }
+
+      // 2. Smooth Crossfade Image 1 -> Image 2
+      if (img1 && img2) {
+        const imgP = smoothstep(0.1, 0.85, e);
+        img1.style.opacity = `${1 - imgP}`;
+        img2.style.opacity = `${imgP}`;
+      }
+
+      // 3. Smooth Shrink & Position Image Wrapper to Left Column
+      if (imgWrapper) {
+        if (isMobile) {
+          const h = 100 - 55 * e; // 100% -> 45%
+          const r = 20 * e;
+          imgWrapper.style.width = '100%';
+          imgWrapper.style.height = `${h}%`;
+          imgWrapper.style.top = `${h / 2}%`;
+          imgWrapper.style.left = '0';
+          imgWrapper.style.borderRadius = `${r}px`;
+        } else {
+          const w = 100 - 52 * e; // 100% -> 48%
+          const h = 100 - 18 * e; // 100% -> 82%
+          const r = 28 * e; // 0 -> 28px
+          const padLeft = 2 * e; // 0rem -> 2rem
+          imgWrapper.style.width = `${w}%`;
+          imgWrapper.style.height = `${h}%`;
+          imgWrapper.style.left = `${padLeft}rem`;
+          imgWrapper.style.borderRadius = `${r}px`;
+        }
+      }
+
+      // 4. Smooth Move & Color Transition for Text Wrapper (Continuous GPU 3D translation)
+      if (textWrapper && headline) {
+        const brEl = headline.querySelector('.craft-br');
+        const spaceEl = headline.querySelector('.craft-space');
+        const rVal = Math.round(255 - (255 - 23) * e);
+        const gVal = Math.round(255 - (255 - 33) * e);
+        const bVal = Math.round(255 - (255 - 25) * e);
+        headline.style.color = `rgb(${rVal}, ${gVal}, ${bVal})`;
+
+        if (isMobile) {
+          const textTop = 50 + 25 * e;
+          textWrapper.style.top = `${textTop}%`;
+          textWrapper.style.left = '50%';
+          textWrapper.style.transform = 'translate3d(-50%, -50%, 0)';
+          textWrapper.style.textAlign = 'center';
+          textWrapper.style.paddingLeft = '1rem';
+          if (brEl) brEl.style.display = 'block';
+          if (spaceEl) spaceEl.style.display = 'none';
+          headline.classList.remove('whitespace-nowrap');
+        } else {
+          // CONTINUOUS SMOOTH INTERPOLATION ON DESKTOP (-50% centered -> 0% right column)
+          const translateX = -50 * (1 - e);
+          textWrapper.style.left = '50%';
+          textWrapper.style.top = '50%';
+          textWrapper.style.transform = `translate3d(${translateX}%, -50%, 0)`;
+          textWrapper.style.width = '50%';
+          
+          const padLeft = 5 * e; // 0rem -> 5rem
+          textWrapper.style.paddingLeft = `${padLeft}rem`;
+
+          if (e > 0.45) {
+            textWrapper.style.textAlign = 'left';
+            if (brEl) brEl.style.display = 'block';
+            if (spaceEl) spaceEl.style.display = 'none';
+            headline.classList.remove('whitespace-nowrap');
+          } else {
+            textWrapper.style.textAlign = 'center';
+            if (brEl) brEl.style.display = 'none';
+            if (spaceEl) spaceEl.style.display = 'inline';
+            headline.classList.add('whitespace-nowrap');
+          }
+        }
+      }
+    };
+
+    const renderLoop = () => {
+      currentP += (targetP - currentP) * 0.12;
+      if (Math.abs(targetP - currentP) < 0.0001) {
+        currentP = targetP;
+      }
+      updateDOM(currentP);
+      animFrame = requestAnimationFrame(renderLoop);
+    };
+
+    const onScroll = () => {
+      const rect = section.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const totalScroll = rect.height - vh;
+      if (totalScroll <= 0) return;
+      targetP = clamp(-rect.top / totalScroll, 0, 1);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+    renderLoop();
+  }
+
+  initCraftSplit(document.getElementById('about'));
+
+  // Reusable Bi-directional Scroll Reveal Observer (Supports Upward & Left-to-Right Reveal)
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-12', '-translate-x-16');
+        entry.target.classList.add('opacity-100', 'translate-y-0', 'translate-x-0');
+      } else {
+        entry.target.classList.remove('opacity-100', 'translate-y-0', 'translate-x-0');
+        if (entry.target.classList.contains('reveal-left-on-scroll')) {
+          entry.target.classList.add('opacity-0', '-translate-x-16');
+        } else {
+          entry.target.classList.add('opacity-0', 'translate-y-12');
+        }
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal-on-scroll, .reveal-left-on-scroll').forEach(el => revealObserver.observe(el));
+
+  // Scroll Reveal Scale Observer for About Section 3-Image Cards (Replays on repeat scrolling)
+  const revealScaleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'scale-50');
+        entry.target.classList.add('opacity-100', 'scale-100');
+      } else {
+        entry.target.classList.remove('opacity-100', 'scale-100');
+        entry.target.classList.add('opacity-0', 'scale-50');
+      }
+    });
+  }, { threshold: 0.05 });
+
+  document.querySelectorAll('.reveal-scale').forEach(el => revealScaleObserver.observe(el));
+
+  // Accordion Gallery Integration
+  function initAccordionGallery(container, options = {}) {
+    if (!container) return;
+    const items = options.items || [];
+    const defaultIndex = options.defaultIndex ?? 2;
+    const accentColor = options.accentColor || '#ffffff';
+    const overlayColor = options.overlayColor || '#172119';
+    const textColor = options.textColor || '#ffffff';
+    const height = options.height ?? 580;
+    const gap = options.gap ?? 14;
+    const radius = options.radius ?? 16;
+    const expandRatio = options.expandRatio ?? 0.52;
+    const orientation = options.orientation || 'horizontal';
+    const duration = options.duration ?? 0.6;
+    const ease = options.ease || 'power3.out';
+    const parallax = options.parallax ?? 0.5;
+    const tilt = options.tilt ?? 8;
+    const stagger = options.stagger ?? 0.06;
+    const trigger = options.trigger || 'hover';
+    const showLabels = options.showLabels ?? true;
+    const grayscale = options.grayscale ?? false;
+    const className = options.className || '';
+
+    const vertical = orientation === 'vertical';
+    const count = items.length;
+    let active = Math.min(Math.max(defaultIndex, 0), count - 1);
+    let mediaSize = 320;
+    let tl = null;
+    let firstRun = true;
+
+    const prefersReduced = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false;
+
+    container.className = `accordion-gallery${vertical ? ' accordion-gallery--vertical' : ''}${className ? ` ${className}` : ''}`;
+    container.setAttribute('role', 'list');
+    container.setAttribute('aria-label', 'Image accordion gallery');
+    container.style.setProperty('--ag-accent', accentColor);
+    container.style.setProperty('--ag-overlay', overlayColor);
+    container.style.setProperty('--ag-text', textColor);
+    container.style.setProperty('--ag-gap', `${gap}px`);
+    container.style.setProperty('--ag-radius', `${radius}px`);
+    container.style.height = vertical ? `${Math.round(height * 1.6)}px` : `${height}px`;
+
+    const panelRefs = [];
+    const mediaRefs = [];
+    const barRefs = [];
+    const textRefs = [];
+
+    container.innerHTML = '';
+
+    items.forEach((item, i) => {
+      const isActive = i === active;
+      const TagName = item.link ? 'a' : 'div';
+      const panel = document.createElement(TagName);
+      panel.className = `ag-panel${isActive ? ' ag-panel--active' : ''}`;
+      panel.style.borderRadius = `${radius}px`;
+      if (item.link) panel.href = item.link;
+      panel.setAttribute('role', 'listitem');
+      panel.setAttribute('tabindex', '0');
+      if (isActive) panel.setAttribute('aria-current', 'true');
+      if (item.label) panel.setAttribute('aria-label', item.label);
+
+      panel.innerHTML = `
+        <span class="ag-panel__frame">
+          <span class="ag-panel__media">
+            <img src="${item.image}" alt="${item.alt || item.label || ''}" draggable="false" ${item.objectPosition ? `style="object-position: ${item.objectPosition};"` : ''} />
+          </span>
+          <span class="ag-panel__overlay" aria-hidden="true"></span>
+        </span>
+        ${showLabels ? `
+          <span class="ag-panel__label" aria-hidden="true">
+            <span class="ag-panel__bar"></span>
+            <span class="ag-panel__text">${item.label || ''}</span>
+          </span>
+        ` : ''}
+      `;
+
+      const media = panel.querySelector('.ag-panel__media');
+      const bar = panel.querySelector('.ag-panel__bar');
+      const text = panel.querySelector('.ag-panel__text');
+
+      panelRefs.push(panel);
+      mediaRefs.push(media);
+      barRefs.push(bar);
+      textRefs.push(text);
+
+      panel.addEventListener('mouseenter', () => {
+        if (trigger === 'hover') setActiveIndex(i);
+      });
+
+      panel.addEventListener('click', (e) => {
+        e.preventDefault();
+        setActiveIndex(i);
+      });
+
+      panel.addEventListener('focus', () => setActiveIndex(i));
+
+      panel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          setActiveIndex((i + 1) % count);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          setActiveIndex((i - 1 + count) % count);
+        }
+      });
+
+      container.appendChild(panel);
+    });
+
+    function applyLayout(animate = true) {
+      if (!panelRefs.length) return;
+
+      const r = Math.min(Math.max(expandRatio, 0.2), 0.9);
+      const grow = count > 1 ? (r * (count - 1)) / (1 - r) : 1;
+
+      tl?.kill();
+      const dur = animate && !prefersReduced ? duration : 0;
+      const newTl = gsap.timeline();
+
+      panelRefs.forEach((panel, i) => {
+        if (!panel) return;
+        const isActive = i === active;
+        const media = mediaRefs[i];
+        const bar = barRefs[i];
+        const text = textRefs[i];
+
+        const rot = isActive ? 0 : (i < active ? tilt : -tilt);
+        const rotProp = vertical ? { rotateX: -rot } : { rotateY: rot };
+
+        newTl.to(panel, { flexGrow: isActive ? grow : 1, ...rotProp, duration: dur, ease }, 0);
+
+        if (media) {
+          const drift = Math.max(-1.5, Math.min(1.5, active - i));
+          const shift = drift * parallax * mediaSize * 0.06;
+          const gray = grayscale ? (isActive ? 0 : 1) : 0;
+          newTl.to(media, {
+            xPercent: -50,
+            yPercent: -50,
+            x: vertical ? 0 : (isActive ? 0 : shift),
+            y: vertical ? (isActive ? 0 : shift) : 0,
+            '--ag-gray': gray,
+            '--ag-dim': 0,
+            duration: dur,
+            ease
+          }, 0);
+        }
+
+        if (showLabels && bar && text) {
+          if (isActive) {
+            newTl.to([bar, text], { opacity: 1, x: 0, duration: dur, ease, stagger: prefersReduced ? 0 : stagger }, 0);
+          } else {
+            newTl.to([bar, text], { opacity: 0, x: -14, duration: dur * 0.6, ease }, 0);
+          }
+        }
+      });
+
+      tl = newTl;
+    }
+
+    function measure() {
+      const rect = container.getBoundingClientRect();
+      const total = vertical ? rect.height : rect.width;
+      const usable = Math.max(total - gap * (count - 1), 120);
+      const size = Math.max(140, usable * Math.min(Math.max(expandRatio, 0.2), 0.9) * 1.22);
+      mediaSize = size;
+      container.style.setProperty('--ag-media-size', `${size}px`);
+      applyLayout(!firstRun);
+    }
+
+    function setActiveIndex(i) {
+      if (active === i) return;
+      active = i;
+      panelRefs.forEach((panel, idx) => {
+        if (idx === active) {
+          panel.classList.add('ag-panel--active');
+          panel.setAttribute('aria-current', 'true');
+        } else {
+          panel.classList.remove('ag-panel--active');
+          panel.removeAttribute('aria-current');
+        }
+      });
+      applyLayout(true);
+    }
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(container);
+    firstRun = false;
+  }
+
+  // ScrollExpand Component Integration
+  function initScrollExpand(container, options = {}) {
+    if (!container) return;
+    const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+    const smoothstep = (edge0, edge1, x) => {
+      const t = clamp((x - edge0) / (edge1 - edge0 || 1e-6), 0, 1);
+      return t * t * (3 - 2 * t);
+    };
+
+    const src = options.src || '';
+    const alt = options.alt || '';
+    const title = options.title || '';
+    const scrollHint = options.scrollHint || '';
+    const startWidth = options.startWidth ?? 50;
+    const startHeight = options.startHeight ?? 65;
+    const startRadius = options.startRadius ?? 24;
+    const endRadius = options.endRadius ?? 0;
+    const mediaZoom = options.mediaZoom ?? 1.35;
+    const scrollDistance = options.scrollDistance ?? 1.2;
+    const holdDistance = options.holdDistance ?? 0.35;
+    const smoothing = options.smoothing ?? 0.1;
+    const overlayScrim = options.overlayScrim ?? 0.55;
+    const useWindowScroll = options.useWindowScroll ?? true;
+    const enabled = options.enabled ?? true;
+    const innerHTMLContent = options.content || '';
+
+    container.className = `scroll-expand ${useWindowScroll ? '' : 'scroll-expand--scroller'}`;
+
+    container.innerHTML = `
+      <div class="scroll-expand__track">
+        <div class="scroll-expand__stage">
+          <div class="scroll-expand__frame">
+            <img class="scroll-expand__media" src="${src}" alt="${alt}" draggable="false" />
+            <div class="scroll-expand__scrim"></div>
+            ${innerHTMLContent ? `<div class="scroll-expand__overlay">${innerHTMLContent}</div>` : ''}
+          </div>
+          ${title ? `<div class="scroll-expand__title">${title}</div>` : ''}
+          ${scrollHint ? `<div class="scroll-expand__hint">${scrollHint}</div>` : ''}
+        </div>
+      </div>
+    `;
+
+    const track = container.querySelector('.scroll-expand__track');
+    const stage = container.querySelector('.scroll-expand__stage');
+    const frame = container.querySelector('.scroll-expand__frame');
+    const media = container.querySelector('.scroll-expand__media');
+    const scrim = container.querySelector('.scroll-expand__scrim');
+    const titleEl = container.querySelector('.scroll-expand__title');
+    const hintEl = container.querySelector('.scroll-expand__hint');
+    const overlayEl = container.querySelector('.scroll-expand__overlay');
+
+    let raf = 0;
+    let current = 0;
+    let target = 0;
+    let stageH = 0;
+    let running = false;
+
+    const applyProgress = p => {
+      if (!frame || !media) return;
+      const e = smoothstep(0, 1, p);
+
+      const w = startWidth + (100 - startWidth) * e;
+      const h = startHeight + (100 - startHeight) * e;
+      const ix = Math.max(0, (100 - w) / 2);
+      const iy = Math.max(0, (100 - h) / 2);
+      const r = startRadius + (endRadius - startRadius) * e;
+      frame.style.clipPath = `inset(${iy}% ${ix}% ${iy}% ${ix}% round ${r}px)`;
+
+      media.style.transform = `scale(${mediaZoom + (1 - mediaZoom) * e})`;
+
+      if (scrim) scrim.style.opacity = `${overlayScrim * e}`;
+
+      if (titleEl) {
+        const out = smoothstep(0.4, 0.88, p);
+        titleEl.style.opacity = `${1 - out}`;
+        titleEl.style.transform = `translate3d(0, ${-28 * out}px, 0) scale(${1 + 0.06 * out})`;
+      }
+
+      if (hintEl) {
+        const gone = smoothstep(0, 0.12, p);
+        hintEl.style.opacity = `${1 - gone}`;
+        hintEl.style.transform = `translate3d(0, ${8 * gone}px, 0)`;
+      }
+
+      if (overlayEl) {
+        const inn = smoothstep(0.68, 1, p);
+        overlayEl.style.opacity = `${inn}`;
+        overlayEl.style.transform = `translate3d(0, ${18 * (1 - inn)}px, 0)`;
+      }
+
+      // Switch top navbar text color to white when showroom image is fully expanded
+      const nav = document.querySelector('nav');
+      if (nav) {
+        const logoSpan = nav.querySelector('span');
+        const navLinks = nav.querySelectorAll('a');
+        if (p > 0.7) {
+          if (logoSpan) logoSpan.style.color = '#ffffff';
+          navLinks.forEach(link => { link.style.color = 'rgba(255, 255, 255, 0.95)'; });
+        } else {
+          if (logoSpan) logoSpan.style.color = '';
+          navLinks.forEach(link => { link.style.color = ''; });
+        }
+      }
+    };
+
+    const measure = () => {
+      stageH = useWindowScroll ? window.innerHeight : container.clientHeight;
+      if (stageH <= 0) return;
+      stage.style.height = `${stageH}px`;
+      track.style.height = `${stageH * (1 + Math.max(0, scrollDistance) + Math.max(0, holdDistance))}px`;
+
+      const w = container.clientWidth || stageH;
+      stage.style.setProperty('--se-title-size', `${clamp(w * 0.075, 20, 84)}px`);
+    };
+
+    const readProgress = () => {
+      if (!enabled) return 1;
+      const span = stageH * Math.max(0.01, scrollDistance);
+      if (useWindowScroll) {
+        const top = track.getBoundingClientRect().top;
+        return clamp(-top / span, 0, 1);
+      }
+      return clamp(container.scrollTop / span, 0, 1);
+    };
+
+    const tick = () => {
+      const k = smoothing <= 0 ? 1 : 1 - Math.exp(-1 / (60 * smoothing));
+      current += (target - current) * k;
+      if (Math.abs(target - current) < 0.0004) {
+        current = target;
+        running = false;
+      }
+      applyProgress(current);
+      if (running) raf = requestAnimationFrame(tick);
+    };
+
+    const kick = () => {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(tick);
+    };
+
+    const onScroll = () => {
+      target = readProgress();
+      if (smoothing <= 0) {
+        current = target;
+        applyProgress(current);
+        return;
+      }
+      kick();
+    };
+
+    const onResize = () => {
+      measure();
+      target = readProgress();
+      current = target;
+      applyProgress(current);
+    };
+
+    measure();
+    target = readProgress();
+    current = target;
+    applyProgress(current);
+
+    const scroller = useWindowScroll ? window : container;
+    scroller.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onResize);
+  }
+
+  // Initialize Accordion Gallery in Hero Section
+  initAccordionGallery(document.getElementById('hero-accordion-gallery'), {
+    items: [
+      { image: 'images/gray-sofa-white-living-room-interior-with-copy-space-3d-rendering.jpg', objectPosition: '50% 85%' },
+      { image: 'images/gray-sofa-brown-living-room-with-copy-space.jpg', objectPosition: '28% 85%' },
+      { image: 'images/gray-sofa-living-room-with-free-space.jpg', objectPosition: '15% 85%' }
+    ],
+    defaultIndex: 1,
+    expandRatio: 0.60,
+    accentColor: '#ffffff',
+    overlayColor: '#172119',
+    textColor: '#ffffff',
+    height: Math.max(680, window.innerHeight - 130),
+    gap: 16,
+    radius: 16,
+    duration: 0.6,
+    ease: 'power3.out',
+    parallax: 0.5,
+    tilt: 8,
+    stagger: 0.06,
+    trigger: 'hover',
+    showLabels: false,
+    grayscale: false
+  });
+
+  // Initialize ScrollExpand Component on Showroom Section
+  initScrollExpand(document.getElementById('showroom-scroll-expand'), {
+    src: 'images/albero-furniture-bratislava-j59xzCv8Hos-unsplash.jpg',
+    alt: 'RELEXIA Showroom Interior',
+    title: 'SHOWROOM',
+    scrollHint: 'Scroll to Expand',
+    startWidth: 50,
+    startHeight: 65,
+    startRadius: 24,
+    endRadius: 0,
+    mediaZoom: 1.35,
+    scrollDistance: 1.2,
+    holdDistance: 0.35,
+    smoothing: 0.1,
+    overlayScrim: 0.70,
+    useWindowScroll: true,
+    content: `
+      <h2 class="font-display-lg text-4xl sm:text-6xl md:text-7xl text-white mb-6 font-normal tracking-wide">SHOWROOM</h2>
+      <p class="font-body-lg text-lg sm:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed mb-8 font-light">
+        릴렉시아의 깊은 휴식을 직접 경험해 보세요. 1:1 전문가 상담을 통해 당신의 공간에 완벽하게 어울리는 소파를 찾아드립니다.
+      </p>
+      <button class="bg-white text-primary px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/90 transition-all rounded-sm font-semibold shadow-lg">MORE VIEW</button>
+    `
+  });
+
+  // Scroll Velocity Engine for Line 1 (Left->Right) and Line 2 (Right->Left)
+  function initScrollVelocity() {
+    const line1 = document.getElementById('velocity-line-1');
+    const line2 = document.getElementById('velocity-line-2');
+    if (!line1 || !line2) return;
+
+    // Clone content for seamless infinite marquee loop
+    line1.innerHTML += line1.innerHTML + line1.innerHTML;
+    line2.innerHTML += line2.innerHTML + line2.innerHTML;
+
+    let pos1 = 0;
+    let pos2 = 0;
+    let lastScrollY = window.scrollY;
+    let velocity = 0;
+
+    function animate() {
+      const currentScrollY = window.scrollY;
+      const scrollDiff = currentScrollY - lastScrollY;
+      lastScrollY = currentScrollY;
+
+      // Inertial velocity lerp
+      velocity += (scrollDiff - velocity) * 0.12;
+
+      // Line 1: Left to Right (+)
+      const speed1 = 0.9 + Math.abs(velocity) * 0.22;
+      pos1 += speed1;
+      const width1 = line1.scrollWidth / 3;
+      if (width1 > 0 && pos1 >= 0) {
+        pos1 = (pos1 % width1) - width1;
+      }
+
+      // Line 2: Right to Left (-)
+      const speed2 = 0.9 + Math.abs(velocity) * 0.22;
+      pos2 -= speed2;
+      const width2 = line2.scrollWidth / 3;
+      if (width2 > 0 && Math.abs(pos2) >= width2) {
+        pos2 = pos2 % width2;
+      }
+
+      line1.style.transform = `translate3d(${pos1}px, 0, 0)`;
+      line2.style.transform = `translate3d(${pos2}px, 0, 0)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  initScrollVelocity();
+
+  // React Bits SplitText Integration for Letter-by-Letter Stagger Animation
+  function createSplitText(element) {
+    if (!element) return [];
+    if (element._splitChars) return element._splitChars;
+    const textNode = element.querySelector('h2, p, div') || element;
+    const rawText = textNode.textContent.trim();
+    textNode.innerHTML = '';
+    const charSpans = [];
+
+    Array.from(rawText).forEach(char => {
+      const span = document.createElement('span');
+      span.className = 'inline-block split-char';
+      if (char === ' ') {
+        span.innerHTML = '&nbsp;';
+      } else {
+        span.textContent = char;
+      }
+      span.style.opacity = '0';
+      span.style.transform = 'translateY(20px)';
+      span.style.willChange = 'transform, opacity';
+      textNode.appendChild(span);
+      charSpans.push(span);
+    });
+
+    element._splitChars = charSpans;
+    return charSpans;
+  }
+
+  function animateSplitIn(element, options = {}) {
+    if (!element) return;
+    const chars = createSplitText(element);
+    if (!chars || !chars.length) return;
+
+    const delay = options.delay || 40; // ms per letter
+    const duration = options.duration || 0.8;
+    const ease = options.ease || 'power3.out';
+    const from = options.from || { opacity: 0, y: 20 };
+    const to = options.to || { opacity: 1, y: 0 };
+
+    element.style.display = 'block';
+    element.classList.remove('opacity-0');
+    element.classList.add('opacity-100');
+
+    gsap.killTweensOf(chars);
+    gsap.fromTo(chars,
+      { opacity: from.opacity, y: from.y },
+      {
+        opacity: to.opacity,
+        y: to.y,
+        duration: duration,
+        ease: ease,
+        stagger: delay / 1000,
+        overwrite: 'auto'
+      }
+    );
+  }
+
+  function animateSplitOut(element, options = {}) {
+    if (!element) return;
+    const chars = element._splitChars || element.querySelectorAll('.split-char');
+    if (!chars || !chars.length) return;
+
+    const duration = options.duration || 0.4;
+    const ease = options.ease || 'power3.in';
+
+    gsap.killTweensOf(chars);
+    gsap.to(chars, {
+      opacity: 0,
+      y: -20,
+      duration: duration,
+      ease: ease,
+      stagger: 0.015,
+      overwrite: 'auto'
+    });
+  }
+
+  // Hover sequential text animation logic for image frame
+  const hoverBox = document.getElementById('hover-image-box');
+  const seq1 = document.getElementById('hover-seq-1');
+  const seq2 = document.getElementById('hover-seq-2');
+  const seq3 = document.getElementById('hover-seq-3');
+  let hoverTimeouts = [];
+
+  function resetHoverSeq() {
+    hoverTimeouts.forEach(t => clearTimeout(t));
+    hoverTimeouts = [];
+
+    [seq1, seq2, seq3].forEach(el => {
+      if (el) {
+        if (el._splitChars) {
+          gsap.killTweensOf(el._splitChars);
+          gsap.set(el._splitChars, { opacity: 0, y: 20 });
+        }
+        el.classList.add('opacity-0');
+        el.classList.remove('opacity-100');
+        el.style.display = 'none';
+      }
+    });
+  }
+
+  if (hoverBox) {
+    hoverBox.addEventListener('mouseenter', () => {
+      resetHoverSeq();
+
+      // Step 1: SplitText "가장 깊은 휴식이 삶의 가치를 만든다."
+      hoverTimeouts.push(setTimeout(() => {
+        animateSplitIn(seq1, { delay: 40, duration: 0.85, ease: 'power3.out', from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0 } });
+      }, 100));
+
+      // Step 1 SplitText Out
+      hoverTimeouts.push(setTimeout(() => {
+        animateSplitOut(seq1, { duration: 0.4, ease: 'power3.in' });
+      }, 2000));
+
+      // Step 2: SplitText "당신의 일상에 비워지는 가장 깊은 휴식"
+      hoverTimeouts.push(setTimeout(() => {
+        if (seq1) seq1.style.display = 'none';
+        animateSplitIn(seq2, { delay: 40, duration: 0.85, ease: 'power3.out', from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0 } });
+      }, 2500));
+
+      // Step 2 SplitText Out
+      hoverTimeouts.push(setTimeout(() => {
+        animateSplitOut(seq2, { duration: 0.4, ease: 'power3.in' });
+      }, 4400));
+
+      // Step 3: SplitText ONLY "RELEXIA" Logo
+      hoverTimeouts.push(setTimeout(() => {
+        if (seq2) seq2.style.display = 'none';
+        animateSplitIn(seq3, { delay: 90, duration: 1.1, ease: 'power3.out', from: { opacity: 0, y: 20 }, to: { opacity: 1, y: 0 } });
+      }, 5000));
+    });
+
+    hoverBox.addEventListener('mouseleave', () => {
+      resetHoverSeq();
+    });
+  }
+</script>
+</body></html>
