@@ -429,12 +429,10 @@
 <nav class="fixed top-0 w-full z-50 bg-transparent transition-colors duration-300">
 <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
 <div class="flex items-center gap-4">
-<span class="font-display-lg text-[22px] sm:text-2xl md:text-3xl text-primary dark:text-primary-fixed tracking-tight font-bold">RELEXIA</span>
+<a href="#" onclick="event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });" class="cursor-pointer font-display-lg text-[22px] sm:text-2xl md:text-3xl text-primary dark:text-primary-fixed tracking-tight font-bold hover:opacity-80 transition-opacity">RELEXIA</a>
 </div>
 <div class="hidden md:flex gap-8 items-center font-body-md text-body-md">
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#collections">Collections</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#craftsmanship">Craftsmanship</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#gallery">Gallery</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#showroom">Showroom</a>
 </div>
 </div>
@@ -476,7 +474,7 @@
 </div>
 </div>
 </section><!-- Craftsmanship Sticky Split Scroll Section -->
-<section class="relative w-full h-[220vh] bg-surface" id="about">
+<section class="relative w-full h-[300vh] bg-surface" id="about">
   <div class="sticky top-0 w-full h-screen overflow-hidden bg-surface flex items-center">
     <!-- Image Column Wrapper -->
     <div class="craft-split-img-wrapper absolute top-1/2 -translate-y-1/2 left-0 w-full h-full overflow-hidden transition-none z-10 shadow-2xl">
@@ -828,7 +826,12 @@
       const vh = window.innerHeight;
       const totalScroll = rect.height - vh;
       if (totalScroll <= 0) return;
-      targetP = clamp(-rect.top / totalScroll, 0, 1);
+      const rawP = clamp(-rect.top / totalScroll, 0, 1);
+      if (rawP <= 0.55) {
+        targetP = clamp(rawP / 0.55, 0, 1);
+      } else {
+        targetP = 1;
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
