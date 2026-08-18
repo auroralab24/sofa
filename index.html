@@ -422,9 +422,110 @@
           .scroll-stack-card:nth-child(2) { top: 110px; }
           .scroll-stack-card:nth-child(3) { top: 140px; }
         }
+
+        /* Intro Overlay CSS (Global) */
+        @keyframes dropInClean {
+            0% { opacity: 0; transform: translateY(-45px); }
+            70% { opacity: 1; transform: translateY(5px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .intro-letter-drop {
+            display: inline-block;
+            opacity: 0;
+            animation: dropInClean 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .intro-letter-1 { animation-delay: 0.1s; }
+        .intro-letter-2 { animation-delay: 0.22s; }
+        .intro-letter-3 { animation-delay: 0.34s; }
+        .intro-letter-4 { animation-delay: 0.46s; }
+        .intro-letter-5 { animation-delay: 0.58s; }
+        .intro-letter-6 { animation-delay: 0.70s; }
+        .intro-letter-7 { animation-delay: 0.82s; }
+
+        .stage-3d {
+            perspective: 1200px;
+            transform-style: preserve-3d;
+        }
+        .intro-sofa-card-3d {
+            transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.65s ease, filter 0.65s ease;
+            will-change: transform, opacity, filter;
+        }
+
+        /* Sun Shafts & Floating Dust Particles CSS */
+        .sun-shaft-beam-1 {
+            background: linear-gradient(128deg, 
+                rgba(255, 245, 210, 0.55) 0%, 
+                rgba(255, 215, 140, 0.3) 35%, 
+                rgba(255, 180, 90, 0.1) 65%, 
+                transparent 85%
+            );
+            filter: blur(18px);
+            transform-origin: top left;
+            animation: beamPulse1 8s ease-in-out infinite alternate;
+        }
+
+        .sun-shaft-beam-2 {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 230, 0.45) 0%, 
+                rgba(255, 225, 160, 0.22) 40%, 
+                rgba(255, 190, 100, 0.05) 70%, 
+                transparent 85%
+            );
+            filter: blur(26px);
+            transform-origin: top left;
+            animation: beamPulse2 10s ease-in-out infinite alternate;
+        }
+
+        .sun-shaft-beam-3 {
+            background: linear-gradient(120deg, 
+                rgba(255, 230, 170, 0.6) 0%, 
+                rgba(255, 190, 110, 0.28) 45%, 
+                transparent 80%
+            );
+            filter: blur(12px);
+            transform-origin: top left;
+            animation: beamPulse1 9s ease-in-out infinite alternate-reverse;
+        }
+
+        @keyframes beamPulse1 {
+            0% { opacity: 0.5; transform: rotate(2deg) scaleY(1); }
+            100% { opacity: 0.85; transform: rotate(5deg) scaleY(1.08); }
+        }
+
+        @keyframes beamPulse2 {
+            0% { opacity: 0.4; transform: rotate(-1deg) scaleY(1); }
+            100% { opacity: 0.75; transform: rotate(3deg) scaleY(1.06); }
+        }
     </style>
 </head>
-<body class="bg-surface text-on-surface font-body-lg antialiased">
+<body class="bg-surface text-on-surface font-body-lg antialiased overflow-hidden">
+
+<!-- Fullscreen Site Intro Screen Overlay (Interactive Blur Cursor Reveal Lens) -->
+<div id="site-intro-overlay" onclick="dismissIntroOverlay(event)" class="fixed inset-0 z-[100] bg-black text-white font-body select-none transition-all duration-1000 ease-in-out overflow-hidden cursor-pointer">
+    
+    <!-- 1. Blurred Background Video Layer -->
+    <div class="absolute inset-0 w-full h-full pointer-events-none z-0">
+        <video id="intro-video-blurred" autoplay loop muted playsinline class="w-full h-full object-cover filter blur-[10px] brightness-[0.85] scale-105">
+            <source src="images/0_Sectional_Sofa_1280x720.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-black/15"></div>
+    </div>
+
+    <!-- 2. Sharp Background Video Layer (Clipped dynamically by rounded square cursor lens) -->
+    <div id="intro-bg-sharp" class="absolute inset-0 w-full h-full pointer-events-none z-10 transition-none" style="clip-path: inset(50% 50% 50% 50% round 64px);">
+        <video id="intro-video-sharp" autoplay loop muted playsinline class="w-full h-full object-cover brightness-[0.95]">
+            <source src="images/0_Sectional_Sofa_1280x720.mp4" type="video/mp4">
+        </video>
+        <!-- Subtle dark overlay on sharp layer for luxury contrast -->
+        <div class="absolute inset-0 bg-black/10"></div>
+    </div>
+
+    <!-- 3. Rounded Square Cursor Lens Box Frame (Follows mouse) -->
+    <div id="intro-cursor-box" class="fixed top-0 left-0 w-[540px] h-[540px] rounded-[64px] border-[2.5px] border-white/85 shadow-[0_25px_60px_rgba(0,0,0,0.45),inset_0_0_25px_rgba(255,255,255,0.35)] pointer-events-none z-20 transition-transform duration-75 ease-out opacity-0 flex items-center justify-center" style="will-change: transform;">
+        <!-- Centered Logo inside Cursor Lens Box with 50% Opacity -->
+        <span class="font-display font-bold text-3xl sm:text-5xl md:text-6xl text-white tracking-[0.22em] opacity-50 select-none drop-shadow-2xl whitespace-nowrap pl-2">RELEXIA</span>
+    </div>
+</div>
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-transparent transition-colors duration-300">
 <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
@@ -432,21 +533,64 @@
 <a href="#" onclick="event.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' });" class="cursor-pointer font-display-lg text-[22px] sm:text-2xl md:text-3xl text-primary dark:text-primary-fixed tracking-tight font-bold hover:opacity-80 transition-opacity">RELEXIA</a>
 </div>
 <div class="hidden md:flex gap-8 items-center font-body-md text-body-md">
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#collections">Collections</a>
-<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="#showroom">Showroom</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300 cursor-pointer" href="#" onclick="event.preventDefault(); showIntroOverlay();">Intro</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="collection.html">Collections</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed transition-colors duration-300" href="showroom.html">Showroom</a>
 </div>
 </div>
 </nav>
-<!-- Hero Banner Header with Accordion Gallery -->
-<header class="relative w-full h-screen pt-20 pb-6 px-margin-mobile md:px-margin-desktop bg-surface flex flex-col justify-center items-center overflow-hidden">
-<!-- Top Brand Watermark Logo -->
-<div class="absolute top-24 sm:top-32 md:top-[296px] left-1/2 -translate-x-1/2 z-20 text-center select-none pointer-events-none w-full px-4">
-<h1 class="font-display-lg text-[36px] sm:text-[70px] md:text-[110px] lg:text-[140px] text-primary/25 tracking-[0.06em] uppercase font-normal leading-none">RELEXIA</h1>
-</div>
-<!-- Accordion Gallery Container -->
-<div class="relative z-10 w-full max-w-[1800px] h-[calc(100vh-120px)] mx-auto">
-<div id="hero-accordion-gallery" class="h-full"></div>
-</div>
+<!-- Hero Banner Header with Video Background Carousel & Typewriter Text -->
+<header id="hero-header-carousel" class="relative w-full h-screen overflow-hidden bg-black flex items-center justify-center select-none">
+    <!-- Slide 1 Video Background (0_Sectional_Sofa_1280x720.mp4) -->
+    <div id="hero-slide-1" class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out opacity-100 z-0">
+        <video id="hero-video-1" autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="images/0_Sectional_Sofa_1280x720.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Slide 2 Video Background (0_Couch_Sofa_1280x720.mp4) -->
+    <div id="hero-slide-2" class="absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out opacity-0 z-0 pointer-events-none">
+        <video id="hero-video-2" muted playsinline class="w-full h-full object-cover">
+            <source src="images/0_Couch_Sofa_1280x720.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Sun Shafts Light Beams Overlay -->
+    <div class="absolute inset-0 pointer-events-none z-15 overflow-hidden">
+        <!-- Visible Diagonal Sun Shaft Light Beams -->
+        <div class="sun-shaft-beam-1 absolute -top-[30%] -left-[10%] w-[100vw] h-[140vh] pointer-events-none mix-blend-screen opacity-70"></div>
+        <div class="sun-shaft-beam-2 absolute -top-[40%] left-[5%] w-[80vw] h-[140vh] pointer-events-none mix-blend-screen opacity-55"></div>
+        <div class="sun-shaft-beam-3 absolute -top-[20%] -left-[20%] w-[90vw] h-[130vh] pointer-events-none mix-blend-screen opacity-60"></div>
+    </div>
+
+    <!-- Dark Scrim Overlay for text contrast -->
+    <div class="absolute inset-0 bg-black/35 pointer-events-none z-10"></div>
+    
+    <!-- Typing Text Overlay Container for Slide 1 -->
+    <div id="hero-text-overlay-1" class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none transition-opacity duration-1000">
+        <h1 id="english-typing-box" class="font-display text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] text-white font-normal tracking-[0.05em] leading-tight max-w-none whitespace-nowrap drop-shadow-2xl transition-opacity duration-600">
+            <span id="typing-content" class="inline whitespace-nowrap"></span><span id="typing-cursor" class="inline-block w-[3px] h-[0.85em] bg-white/90 align-middle ml-2 animate-pulse"></span>
+        </h1>
+        <h1 id="korean-split-content" class="font-body text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] text-white font-light tracking-[0.1em] leading-tight max-w-none whitespace-nowrap drop-shadow-2xl hidden opacity-0">
+            가장 깊은 휴식이 삶의 가치를 만든다.
+        </h1>
+    </div>
+
+    <!-- Text Overlay Container for Slide 2 -->
+    <div id="hero-text-overlay-2" class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none transition-opacity duration-1000 opacity-0">
+        <h1 class="font-display text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[54px] text-white font-normal tracking-[0.08em] leading-tight max-w-none whitespace-nowrap drop-shadow-2xl">
+            C O U C H &nbsp; C O L L E C T I O N
+        </h1>
+        <p class="font-body text-base sm:text-xl text-white/80 font-light tracking-[0.25em] mt-4">
+            공간의 깊이를 더하는 고품격 소파 라인업
+        </p>
+    </div>
+
+    <!-- Hero Slide Navigation Indicators -->
+    <div class="absolute bottom-10 z-30 flex gap-3 items-center">
+        <button id="hero-dot-1" onclick="switchToHeroSlide(1)" aria-label="Hero Slide 1" class="w-3 h-3 rounded-full bg-white transition-all duration-300 shadow-md cursor-pointer"></button>
+        <button id="hero-dot-2" onclick="switchToHeroSlide(2)" aria-label="Hero Slide 2" class="w-3 h-3 rounded-full bg-white/40 transition-all duration-300 shadow-md hover:bg-white/70 cursor-pointer"></button>
+    </div>
 </header>
 <!-- About RELEXIA -->
 <section class="min-h-0 md:min-h-screen pt-10 pb-[70px] sm:py-14 md:py-[240px] px-margin-mobile md:px-margin-desktop bg-surface-container-lowest flex items-center justify-center">
@@ -454,9 +598,9 @@
 <div class="relative w-full flex items-center justify-center mt-0 md:-mt-16 z-10">
 <div class="relative w-full h-[260px] sm:h-[360px] md:h-[680px] overflow-hidden flex items-center justify-center rounded-sm">
 <!-- 7010.png -->
-<img id="sofa-img-1" alt="RELEXIA Sofa 7010" class="absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out translate-y-0 opacity-100" src="images/7010.png">
+<img id="sofa-img-1" alt="RELEXIA Sofa 7010" class="absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out translate-y-0 opacity-100" src="images/collections/7010.png">
 <!-- 7648.png -->
-<img id="sofa-img-2" alt="RELEXIA Sofa 7648" class="absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out -translate-y-full opacity-0" src="images/7648.png">
+<img id="sofa-img-2" alt="RELEXIA Sofa 7648" class="absolute inset-0 w-full h-full object-contain transition-all duration-[1500ms] ease-in-out -translate-y-full opacity-0" src="images/collections/7648.png">
 </div>
 <div class="absolute -right-4 md:-right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
 <button aria-label="Sofa 1" class="w-3 h-8 bg-primary rounded-full transition-all duration-300 shadow-sm" id="sofa-btn-0" onclick="switchSofa(0)"></button>
@@ -504,7 +648,7 @@
 <!-- Card 1 -->
 <div class="group cursor-pointer">
 <div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
-<img alt="RELEXIA Olive Lounge Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/7010.png">
+<img alt="RELEXIA Olive Lounge Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/collections/7010.png">
 </div>
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
 <h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Olive Lounge</h3>
@@ -516,7 +660,7 @@
 <!-- Card 2 -->
 <div class="group cursor-pointer">
 <div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
-<img alt="RELEXIA Classic Soft Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/7648.png">
+<img alt="RELEXIA Classic Soft Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/collections/7648.png">
 </div>
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
 <h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Classic Soft</h3>
@@ -528,7 +672,7 @@
 <!-- Card 3 -->
 <div class="group cursor-pointer">
 <div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
-<img alt="RELEXIA Modern Velvet Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/0addfb45-bbe7-4a8b-885d-a50bfa5369d6.png">
+<img alt="RELEXIA Modern Velvet Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/collections/0addfb45-bbe7-4a8b-885d-a50bfa5369d6.png">
 </div>
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
 <h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Modern Velvet</h3>
@@ -540,7 +684,7 @@
 <!-- Card 4 -->
 <div class="group cursor-pointer">
 <div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
-<img alt="RELEXIA Minimal Studio Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/3d4c42d6-2249-48a3-9418-63fedf3379e5.png">
+<img alt="RELEXIA Minimal Studio Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/collections/3d4c42d6-2249-48a3-9418-63fedf3379e5.png">
 </div>
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
 <h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Minimal Studio</h3>
@@ -552,7 +696,7 @@
 <!-- Card 5 -->
 <div class="group cursor-pointer">
 <div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
-<img alt="RELEXIA Leather Module Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/9ee509ab-19ba-4847-be4b-06d9867d2d5b.png">
+<img alt="RELEXIA Leather Module Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/collections/9ee509ab-19ba-4847-be4b-06d9867d2d5b.png">
 </div>
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
 <h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Leather Module</h3>
@@ -564,7 +708,7 @@
 <!-- Card 6 -->
 <div class="group cursor-pointer">
 <div class="relative h-[170px] sm:h-[220px] md:h-[300px] bg-[#f9f8f6] rounded-sm overflow-hidden flex items-center justify-center p-3 sm:p-5 mb-3 sm:mb-4 transition-colors group-hover:bg-[#f2f0eb]">
-<img alt="RELEXIA Natural Comfort Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/e541553d-9472-406c-b048-95709a69bbb6.png">
+<img alt="RELEXIA Natural Comfort Sofa" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105" src="images/collections/e541553d-9472-406c-b048-95709a69bbb6.png">
 </div>
 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-2 mb-1">
 <h3 class="font-headline-sm text-sm sm:text-base md:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors">RELEXIA Natural Comfort</h3>
@@ -574,7 +718,7 @@
 </div>
 </div>
 <div class="mt-14 md:mt-16 text-center">
-<button class="bg-primary text-on-primary px-10 py-4 font-label-caps text-label-caps text-sm uppercase tracking-widest hover:opacity-90 transition-all rounded-sm shadow-sm">MORE VIEW</button>
+<a href="collection.html" class="inline-block bg-primary text-on-primary px-10 py-4 font-label-caps text-label-caps text-sm uppercase tracking-widest hover:opacity-90 transition-all rounded-sm shadow-sm">MORE VIEW</a>
 </div>
 </div>
 </section>
@@ -1235,30 +1379,33 @@
     window.addEventListener('resize', onResize);
   }
 
-  // Initialize Accordion Gallery in Hero Section
-  initAccordionGallery(document.getElementById('hero-accordion-gallery'), {
-    items: [
-      { image: 'images/gray-sofa-white-living-room-interior-with-copy-space-3d-rendering.jpg', objectPosition: '50% 85%' },
-      { image: 'images/gray-sofa-brown-living-room-with-copy-space.jpg', objectPosition: '28% 85%' },
-      { image: 'images/gray-sofa-living-room-with-free-space.jpg', objectPosition: '15% 85%' }
-    ],
-    defaultIndex: 1,
-    expandRatio: 0.60,
-    accentColor: '#ffffff',
-    overlayColor: '#172119',
-    textColor: '#ffffff',
-    height: Math.max(680, window.innerHeight - 130),
-    gap: 16,
-    radius: 16,
-    duration: 0.6,
-    ease: 'power3.out',
-    parallax: 0.5,
-    tilt: 8,
-    stagger: 0.06,
-    trigger: 'hover',
-    showLabels: false,
-    grayscale: false
-  });
+  // Initialize Accordion Gallery in Hero Section (if container exists)
+  const heroGalleryEl = document.getElementById('hero-accordion-gallery');
+  if (heroGalleryEl) {
+    initAccordionGallery(heroGalleryEl, {
+      items: [
+        { image: 'images/gray-sofa-white-living-room-interior-with-copy-space-3d-rendering.jpg', objectPosition: '50% 85%' },
+        { image: 'images/gray-sofa-brown-living-room-with-copy-space.jpg', objectPosition: '28% 85%' },
+        { image: 'images/gray-sofa-living-room-with-free-space.jpg', objectPosition: '15% 85%' }
+      ],
+      defaultIndex: 1,
+      expandRatio: 0.60,
+      accentColor: '#ffffff',
+      overlayColor: '#172119',
+      textColor: '#ffffff',
+      height: Math.max(680, window.innerHeight - 130),
+      gap: 16,
+      radius: 16,
+      duration: 0.6,
+      ease: 'power3.out',
+      parallax: 0.5,
+      tilt: 8,
+      stagger: 0.06,
+      trigger: 'hover',
+      showLabels: false,
+      grayscale: false
+    });
+  }
 
   // Initialize ScrollExpand Component on Showroom Section
   initScrollExpand(document.getElementById('showroom-scroll-expand'), {
@@ -1281,9 +1428,11 @@
       <p class="font-body-lg text-lg sm:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed mb-8 font-light">
         릴렉시아의 깊은 휴식을 직접 경험해 보세요. 1:1 전문가 상담을 통해 당신의 공간에 완벽하게 어울리는 소파를 찾아드립니다.
       </p>
-      <button class="bg-white text-primary px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/90 transition-all rounded-sm font-semibold shadow-lg">MORE VIEW</button>
+      <a href="showroom.html" class="inline-block bg-white text-primary px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/90 transition-all rounded-sm font-semibold shadow-lg text-center">MORE VIEW</a>
     `
   });
+
+
 
   // Scroll Velocity Engine for Line 1 (Left->Right) and Line 2 (Right->Left)
   function initScrollVelocity() {
@@ -1332,6 +1481,389 @@
 
     requestAnimationFrame(animate);
   }
+
+  // 2-Stage Hero Animation: English Typewriter -> Fade Out -> Korean Sentence Slide-Up -> 4s Delay -> Slide 2 Video (0_Couch_Sofa)
+  let heroTypingStarted = false;
+  let heroAutoTimer = null;
+
+  function switchToHeroSlide(slideNum) {
+    const slide1 = document.getElementById('hero-slide-1');
+    const slide2 = document.getElementById('hero-slide-2');
+    const video1 = document.getElementById('hero-video-1');
+    const video2 = document.getElementById('hero-video-2');
+    const overlay1 = document.getElementById('hero-text-overlay-1');
+    const overlay2 = document.getElementById('hero-text-overlay-2');
+    const dot1 = document.getElementById('hero-dot-1');
+    const dot2 = document.getElementById('hero-dot-2');
+
+    if (!slide1 || !slide2) return;
+
+    if (slideNum === 2) {
+      // Switch to Slide 2 (0_Couch_Sofa_1280x720.mp4)
+      slide1.style.opacity = '0';
+      slide1.style.pointerEvents = 'none';
+      overlay1.style.opacity = '0';
+
+      slide2.style.opacity = '1';
+      slide2.style.pointerEvents = 'auto';
+      overlay2.style.opacity = '1';
+
+      if (video2) {
+        video2.currentTime = 0;
+        video2.play().catch(() => {});
+      }
+
+      if (dot1) dot1.className = 'w-3 h-3 rounded-full bg-white/40 transition-all duration-300 shadow-md hover:bg-white/70 cursor-pointer';
+      if (dot2) dot2.className = 'w-3 h-3 rounded-full bg-white transition-all duration-300 shadow-md cursor-pointer';
+    } else {
+      // Switch back to Slide 1
+      slide2.style.opacity = '0';
+      slide2.style.pointerEvents = 'none';
+      overlay2.style.opacity = '0';
+
+      slide1.style.opacity = '1';
+      slide1.style.pointerEvents = 'auto';
+      overlay1.style.opacity = '1';
+
+      if (video1) video1.play().catch(() => {});
+
+      if (dot1) dot1.className = 'w-3 h-3 rounded-full bg-white transition-all duration-300 shadow-md cursor-pointer';
+      if (dot2) dot2.className = 'w-3 h-3 rounded-full bg-white/40 transition-all duration-300 shadow-md hover:bg-white/70 cursor-pointer';
+    }
+  }
+
+  function startHeroTypingAnimation() {
+    if (heroTypingStarted) return;
+    heroTypingStarted = true;
+
+    const englishText = "Profound rest, purposeful life";
+    const targetEl = document.getElementById('typing-content');
+    const englishBox = document.getElementById('english-typing-box');
+    const koreanBox = document.getElementById('korean-split-content');
+
+    if (!targetEl || !englishBox || !koreanBox) return;
+
+    let index = 0;
+    targetEl.textContent = "";
+    englishBox.style.opacity = "1";
+    englishBox.style.display = "block";
+    koreanBox.classList.add('hidden');
+    switchToHeroSlide(1);
+
+    // Stage 1: Type English
+    function typeEnglish() {
+      if (index < englishText.length) {
+        targetEl.textContent += englishText.charAt(index);
+        index++;
+        const delay = Math.floor(Math.random() * 45) + 110;
+        setTimeout(typeEnglish, delay);
+      } else {
+        // English completed -> wait 1.2s then fade out English box
+        setTimeout(transitionToKoreanSplit, 1200);
+      }
+    }
+
+    // Stage 2: Fade out English box and bring up entire Korean sentence all at once
+    function transitionToKoreanSplit() {
+      englishBox.style.opacity = "0";
+      setTimeout(() => {
+        englishBox.style.display = "none";
+        koreanBox.classList.remove('hidden');
+        
+        // Animate the entire Korean sentence block slowly at once (duration: 2.2s)
+        gsap.fromTo(koreanBox,
+          { opacity: 0, y: 16 },
+          { 
+            opacity: 1, 
+            y: 0, 
+            duration: 2.2, 
+            ease: 'power2.out',
+            onComplete: () => {
+              // Korean text entrance finished! Wait 2 seconds, then transition to 0_Couch_Sofa_1280x720.mp4
+              if (heroAutoTimer) clearTimeout(heroAutoTimer);
+              heroAutoTimer = setTimeout(() => {
+                switchToHeroSlide(2);
+              }, 2000);
+            }
+          }
+        );
+      }, 600);
+    }
+
+    setTimeout(typeEnglish, 300);
+  }
+
+  // Integrated Fullscreen Intro Overlay Controller
+  let introActiveIndex = 1;
+
+  function updateIntro3DPositions() {
+    const card0 = document.getElementById('intro-sofa-card-0');
+    const card1 = document.getElementById('intro-sofa-card-1');
+    const card2 = document.getElementById('intro-sofa-card-2');
+    const cards = [card0, card1, card2];
+
+    cards.forEach((card, idx) => {
+      if (!card) return;
+      const pos = (idx - introActiveIndex + 3) % 3;
+      if (pos === 0) {
+        card.style.transform = 'translate3d(0px, 0px, 120px) rotateY(0deg) scale(1.3)';
+        card.style.opacity = '1';
+        card.style.zIndex = '30';
+        card.style.filter = 'drop-shadow(0 30px 45px rgba(36, 43, 38, 0.35))';
+      } else if (pos === 1) {
+        const offsetX = window.innerWidth < 640 ? 170 : (window.innerWidth < 1024 ? 320 : 480);
+        card.style.transform = `translate3d(${offsetX}px, 25px, -150px) rotateY(-35deg) scale(0.78)`;
+        card.style.opacity = '0.65';
+        card.style.zIndex = '10';
+        card.style.filter = 'drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15))';
+      } else if (pos === 2) {
+        const offsetX = window.innerWidth < 640 ? -170 : (window.innerWidth < 1024 ? -320 : -480);
+        card.style.transform = `translate3d(${offsetX}px, 25px, -150px) rotateY(35deg) scale(0.78)`;
+        card.style.opacity = '0.65';
+        card.style.zIndex = '10';
+        card.style.filter = 'drop-shadow(0 15px 25px rgba(0, 0, 0, 0.15))';
+      }
+    });
+  }
+
+  function hoverIntroCard(idx) {
+    if (introActiveIndex !== idx) {
+      introActiveIndex = idx;
+      updateIntro3DPositions();
+    }
+  }
+
+  function selectIntroCard(idx) {
+    introActiveIndex = idx;
+    updateIntro3DPositions();
+  }
+
+  let isLensExpanding = false;
+
+  function dismissIntroOverlay(e) {
+    if (isLensExpanding) return;
+    const overlay = document.getElementById('site-intro-overlay');
+    if (!overlay || overlay.style.display === 'none') return;
+
+    isLensExpanding = true;
+
+    // Seamless Video Synchronization: match hero-video-1 to current intro video timestamp
+    const introVid = document.getElementById('intro-video-blurred');
+    const heroVid1 = document.getElementById('hero-video-1');
+    if (introVid && heroVid1 && !isNaN(introVid.currentTime)) {
+      heroVid1.currentTime = introVid.currentTime;
+      heroVid1.play().catch(() => {});
+    }
+
+    // Lock lens center to click position if mouse click event provided
+    if (e && e.clientX !== undefined) {
+      targetLensX = e.clientX;
+      targetLensY = e.clientY;
+      lensX = e.clientX;
+      lensY = e.clientY;
+    }
+
+    const startSize = window.innerWidth < 640 ? 320 : 540;
+    const maxDimension = Math.max(window.innerWidth, window.innerHeight);
+    const targetSize = maxDimension * 2.8;
+    const startTime = performance.now();
+    const duration = 850; // 0.85s duration
+
+    function animateExpansion(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(1, elapsed / duration);
+      // Power ease-in for explosive expansion feel
+      const easeProgress = Math.pow(progress, 2.2);
+
+      const currentSize = startSize + (targetSize - startSize) * easeProgress;
+      const currentRadius = Math.max(0, 64 * (1 - easeProgress));
+
+      const half = currentSize / 2;
+      const left = lensX - half;
+      const top = lensY - half;
+      const right = window.innerWidth - (left + currentSize);
+      const bottom = window.innerHeight - (top + currentSize);
+
+      const sharpLayer = document.getElementById('intro-bg-sharp');
+      const cursorBox = document.getElementById('intro-cursor-box');
+
+      if (sharpLayer) {
+        sharpLayer.style.clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px round ${currentRadius}px)`;
+      }
+      if (cursorBox) {
+        cursorBox.style.width = `${currentSize}px`;
+        cursorBox.style.height = `${currentSize}px`;
+        cursorBox.style.borderRadius = `${currentRadius}px`;
+        cursorBox.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+        cursorBox.style.opacity = `${Math.max(0, 1 - progress * 1.2)}`;
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(animateExpansion);
+      } else {
+        // Complete full-screen expansion, fade overlay in-place (no slide up) to seamlessly reveal main video
+        overlay.style.opacity = '0';
+        
+        setTimeout(() => {
+          startHeroTypingAnimation();
+        }, 150);
+
+        setTimeout(() => {
+          overlay.style.display = 'none';
+          document.body.classList.remove('overflow-hidden');
+          isLensExpanding = false;
+          try { sessionStorage.setItem('hasSeenIntro', 'true'); } catch(err){}
+        }, 600);
+      }
+    }
+
+    requestAnimationFrame(animateExpansion);
+  }
+
+  function showIntroOverlay() {
+    const overlay = document.getElementById('site-intro-overlay');
+    if (!overlay) return;
+    heroTypingStarted = false;
+    isLensExpanding = false;
+    document.body.classList.add('overflow-hidden');
+    overlay.style.display = 'block';
+    overlay.style.opacity = '1';
+    overlay.style.transform = 'translateY(0)';
+
+    // Sync intro video timestamp back from hero video
+    const introVid = document.getElementById('intro-video-blurred');
+    const introVidSharp = document.getElementById('intro-video-sharp');
+    const heroVid1 = document.getElementById('hero-video-1');
+    if (heroVid1 && introVid && !isNaN(heroVid1.currentTime)) {
+      introVid.currentTime = heroVid1.currentTime;
+      if (introVidSharp) introVidSharp.currentTime = heroVid1.currentTime;
+      introVid.play().catch(() => {});
+      if (introVidSharp) introVidSharp.play().catch(() => {});
+    }
+
+    // Reset sharp layer and cursor box
+    const sharpLayer = document.getElementById('intro-bg-sharp');
+    const cursorBox = document.getElementById('intro-cursor-box');
+    if (cursorBox) cursorBox.style.opacity = '1';
+    if (sharpLayer) sharpLayer.style.clipPath = `inset(50% 50% 50% 50% round 64px)`;
+
+    if (!lensAnimFrame) lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
+  }
+
+  // Handle Wheel Scroll inside Intro Overlay
+  let introWheeling = false;
+  window.addEventListener('wheel', (e) => {
+    const overlay = document.getElementById('site-intro-overlay');
+    if (!overlay || overlay.style.display === 'none' || overlay.style.opacity === '0') return;
+
+    if (introWheeling) return;
+    if (Math.abs(e.deltaY) < 15) return;
+
+    introWheeling = true;
+    dismissIntroOverlay(e);
+    setTimeout(() => { introWheeling = false; }, 400);
+  }, { passive: true });
+
+  // Interactive Cursor Reveal Lens Logic (Rounded Square Clear Reveal Window)
+  let lensX = window.innerWidth / 2;
+  let lensY = window.innerHeight / 2;
+  let targetLensX = lensX;
+  let targetLensY = lensY;
+  let lensAnimFrame = null;
+
+  function updateIntroCursorLens() {
+    if (isLensExpanding) return;
+    const sharpLayer = document.getElementById('intro-bg-sharp');
+    const cursorBox = document.getElementById('intro-cursor-box');
+    const overlay = document.getElementById('site-intro-overlay');
+
+    if (!sharpLayer || !cursorBox || !overlay || overlay.style.display === 'none') return;
+
+    // Sync sharp video timestamp to blurred video timestamp
+    const vBlur = document.getElementById('intro-video-blurred');
+    const vSharp = document.getElementById('intro-video-sharp');
+    if (vBlur && vSharp && Math.abs(vSharp.currentTime - vBlur.currentTime) > 0.06) {
+      vSharp.currentTime = vBlur.currentTime;
+    }
+
+    // Smooth lerp follow
+    lensX += (targetLensX - lensX) * 0.22;
+    lensY += (targetLensY - lensY) * 0.22;
+
+    const size = window.innerWidth < 640 ? 320 : 540;
+    const radius = window.innerWidth < 640 ? 40 : 64;
+    const half = size / 2;
+
+    const left = lensX - half;
+    const top = lensY - half;
+    const right = window.innerWidth - (left + size);
+    const bottom = window.innerHeight - (top + size);
+
+    // Clip sharp image layer exactly inside the rounded square box
+    sharpLayer.style.clipPath = `inset(${top}px ${right}px ${bottom}px ${left}px round ${radius}px)`;
+
+    // Position cursor box border frame
+    cursorBox.style.width = `${size}px`;
+    cursorBox.style.height = `${size}px`;
+    cursorBox.style.borderRadius = `${radius}px`;
+    cursorBox.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+    cursorBox.style.opacity = '1';
+
+    lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
+  }
+
+  window.addEventListener('mousemove', (e) => {
+    const overlay = document.getElementById('site-intro-overlay');
+    if (!overlay || overlay.style.display === 'none') return;
+
+    targetLensX = e.clientX;
+    targetLensY = e.clientY;
+
+    if (!lensAnimFrame) {
+      lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
+    }
+  });
+
+  // Init Intro Overlay Sequence on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', () => {
+    updateIntro3DPositions();
+
+    // Check if user navigated directly or returning from Collections page without intro
+    const isNoIntro = window.location.search.includes('nointro=true') || sessionStorage.getItem('hasSeenIntro') === 'true';
+    if (isNoIntro) {
+      const overlay = document.getElementById('site-intro-overlay');
+      if (overlay) overlay.style.display = 'none';
+      document.body.classList.remove('overflow-hidden');
+      startHeroTypingAnimation();
+    } else {
+      if (!lensAnimFrame) lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
+    }
+
+    // Slide 2 Video Ended Handler -> Auto Return to Slide 1
+    const video2 = document.getElementById('hero-video-2');
+    if (video2) {
+      video2.addEventListener('ended', () => {
+        heroTypingStarted = false;
+        switchToHeroSlide(1);
+        startHeroTypingAnimation();
+      });
+    }
+    setTimeout(() => {
+      const topSub = document.getElementById('intro-top-subtitle');
+      if (topSub) topSub.style.opacity = '1';
+    }, 1000);
+    setTimeout(() => {
+      const caption = document.getElementById('intro-logo-caption');
+      if (caption) caption.style.opacity = '1';
+    }, 1100);
+    setTimeout(() => {
+      const btnWrapper = document.getElementById('intro-enter-btn-wrapper');
+      if (btnWrapper) {
+        btnWrapper.style.opacity = '1';
+        btnWrapper.style.transform = 'translateY(0)';
+      }
+    }, 1600);
+  });
 
   initScrollVelocity();
 

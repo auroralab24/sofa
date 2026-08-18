@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html class="light" lang="ko">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RELEXIA Showroom - 쇼룸 안내 및 1:1 상담 예약</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..700;1,400..700&amp;family=Noto+Serif+KR:wght@300;400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "primary": "#172119",
+                    "primary-fixed": "#dae5da",
+                    "primary-container": "#2c362e",
+                    "surface": "#ffffff",
+                    "surface-variant": "#e9e1db",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#faf2ec",
+                    "surface-container": "#f4ece6",
+                    "surface-container-high": "#efe7e0",
+                    "secondary": "#6b5c4c",
+                    "secondary-container": "#f4dfcb",
+                    "on-surface": "#1e1b17",
+                    "on-surface-variant": "#434843",
+                    "outline": "#747873",
+                    "outline-variant": "#c4c8c2",
+                    "on-primary": "#ffffff"
+                },
+                borderRadius: {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+                },
+                spacing: {
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "section-gap": "100px",
+                    "margin-desktop": "80px",
+                    "container-max": "1440px"
+                },
+                fontFamily: {
+                    "display-lg": ["EB Garamond", "serif"],
+                    "body-lg": ["Manrope", "sans-serif"],
+                    "serif-kr": ["Noto Serif KR", "serif"]
+                }
+            }
+        }
+    }
+</script>
+
+<style>
+    /* Custom scrollbars & smooth behavior */
+    html {
+        scroll-behavior: smooth;
+    }
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 24;
+    }
+    .tab-active {
+        color: #172119;
+        border-bottom-color: #172119;
+        font-weight: 700;
+    }
+    .tab-inactive {
+        color: #747873;
+        border-bottom-color: transparent;
+    }
+    .tab-inactive:hover {
+        color: #172119;
+    }
+    /* Toast slide up animation */
+    @keyframes slideUpFade {
+        0% { opacity: 0; transform: translate(-50%, 20px); }
+        100% { opacity: 1; transform: translate(-50%, 0); }
+    }
+    .toast-animate {
+        animation: slideUpFade 0.3s ease-out forwards;
+    }
+</style>
+</head>
+
+<body class="bg-white text-on-surface font-body-lg antialiased selection:bg-primary selection:text-white">
+
+<!-- Top Fixed Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300">
+    <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+        <div class="flex items-center gap-6">
+            <a href="index.html?nointro=true" class="cursor-pointer font-display-lg text-2xl sm:text-3xl text-primary tracking-tight font-bold hover:opacity-80 transition-opacity">RELEXIA</a>
+            <span class="hidden sm:inline-block text-xs text-outline tracking-widest uppercase font-semibold border-l border-outline-variant pl-4">Showroom</span>
+        </div>
+        <div class="flex gap-6 sm:gap-8 items-center font-body-md text-sm font-medium">
+            <a href="index.html?nointro=true" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+                <span class="material-symbols-outlined text-lg">home</span>
+                <span class="hidden sm:inline">홈으로</span>
+            </a>
+            <a href="collection.html" class="text-on-surface-variant hover:text-primary transition-colors">Collections</a>
+            <a href="showroom.html" class="text-primary font-bold border-b-2 border-primary pb-0.5">Showroom</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Page Header / Hero Section (쇼룸 배경 이미지 상단 적용) -->
+<header class="relative w-full min-h-[520px] md:min-h-[640px] pt-24 pb-16 px-margin-mobile md:px-margin-desktop flex items-center justify-center overflow-hidden">
+    <!-- Showroom Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="images/albero-furniture-bratislava-j59xzCv8Hos-unsplash.jpg" alt="RELEXIA Showroom Top Hero Background" class="w-full h-full object-cover object-center scale-105 transform transition-transform duration-1000">
+        <!-- Dark scrim gradient overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/40"></div>
+    </div>
+
+    <!-- Hero Content Overlay -->
+    <div class="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
+        <h1 class="font-display-lg text-4xl sm:text-6xl md:text-7xl font-normal tracking-wide text-white mb-6 leading-tight">
+            SHOWROOM
+        </h1>
+        
+        <p class="font-body-lg text-base sm:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed font-light">
+            가장 깊은 휴식이 완성되는 공간.<br class="hidden sm:inline">
+            릴렉시아의 프리미엄 소파 컬렉션을 직접 체험하고 1:1 맞춤 컨설팅을 받아보세요.
+        </p>
+    </div>
+</header>
+
+<!-- Main Container -->
+<main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20 md:py-28">
+
+    <!-- 1. Tabs Section (서울 강남점 / 서울 영등포점 / 부산 해운대점) -->
+    <section class="w-full mb-20 sm:mb-24 flex justify-center" id="store-tabs-section">
+        <div class="w-full max-w-3xl border-b border-outline-variant/60">
+            <!-- Store Tabs Buttons -->
+            <div class="flex items-center justify-center gap-3 sm:gap-12 w-full mx-auto overflow-x-auto no-scrollbar">
+                <button onclick="switchTab('gangnam')" id="tab-btn-gangnam" class="tab-btn tab-active pb-4 text-lg sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-2 sm:px-4 text-center">
+                    서울 강남점
+                </button>
+                <button onclick="switchTab('yeongdeungpo')" id="tab-btn-yeongdeungpo" class="tab-btn tab-inactive pb-4 text-lg sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-2 sm:px-4 text-center">
+                    서울 영등포점
+                </button>
+                <button onclick="switchTab('haeundae')" id="tab-btn-haeundae" class="tab-btn tab-inactive pb-4 text-lg sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-2 sm:px-4 text-center">
+                    부산 해운대점
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Card Wrapper for Active Tab -->
+    <div id="store-content-container" class="space-y-28 sm:space-y-32">
+
+        <!-- 2. Store Image Slider Section (매장 이미지 슬라이드) -->
+        <section class="w-full">
+            <!-- Main Slide Image Viewport -->
+            <div class="relative w-full h-[360px] sm:h-[500px] md:h-[600px] rounded-xl overflow-hidden bg-surface-container shadow-sm group">
+                <img id="main-slide-img" src="images/showroom/caroline-badran-in2D_wh4sq8-unsplash.jpg" alt="Showroom View" style="object-position: 50% 85%;" class="w-full h-full object-cover">
+                
+                <!-- Side Navigation Arrows -->
+                <button onclick="prevSlide()" aria-label="Previous Slide" class="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all shadow-xl hover:scale-105">
+                    <span class="material-symbols-outlined text-2xl sm:text-3xl">chevron_left</span>
+                </button>
+                <button onclick="nextSlide()" aria-label="Next Slide" class="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/40 hover:bg-black/80 backdrop-blur-md border border-white/20 text-white flex items-center justify-center transition-all shadow-xl hover:scale-105">
+                    <span class="material-symbols-outlined text-2xl sm:text-3xl">chevron_right</span>
+                </button>
+
+                <!-- Bottom Centered Dot Indicators -->
+                <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center px-4 py-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 shadow-lg">
+                    <div id="slide-dots-container" class="flex items-center gap-2">
+                        <!-- Dynamically populated dots -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 3. Store Information Section (행 형태 텍스트 리스트 - 여백 확대) -->
+        <section class="w-full py-6 my-4">
+            <div class="space-y-8 text-primary">
+                
+                <!-- Row 1: 주소 -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-8 py-2">
+                    <div class="flex items-center gap-2 sm:w-44 shrink-0">
+                        <span class="text-sm sm:text-base tracking-wider font-bold text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg sm:text-xl">location_on</span> 주소
+                        </span>
+                    </div>
+                    <div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <p class="text-base sm:text-lg font-semibold leading-relaxed">
+                            <span id="info-address">서울특별시 강남구 테헤란로 427 릴렉시아 플래그십 스토어 1-3층</span>
+                            <span id="info-address-sub" class="text-sm text-outline font-normal ml-1 sm:ml-3">(2호선/수인분당선 선릉역 10번 출구 도보 3분)</span>
+                        </p>
+                        <button onclick="copyAddress()" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary hover:text-secondary underline underline-offset-4 transition-colors whitespace-nowrap shrink-0">
+                            <span class="material-symbols-outlined text-base">content_copy</span> 주소 복사
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Row 2: 영업시간 -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-8 py-2">
+                    <div class="flex items-center gap-2 sm:w-44 shrink-0">
+                        <span class="text-sm sm:text-base tracking-wider font-bold text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg sm:text-xl">schedule</span> 영업시간
+                        </span>
+                    </div>
+                    <div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <p class="text-base sm:text-lg font-semibold">
+                            <span>평일(월-금) 10:00 - 20:00</span>
+                            <span class="mx-3 text-outline-variant">|</span>
+                            <span>주말/공휴일 10:00 - 21:00</span>
+                            <span class="text-sm text-outline font-normal ml-3">(연중무휴)</span>
+                        </p>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold rounded-full shrink-0">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 영업 중
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Row 3: 전화번호 -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-8 py-2">
+                    <div class="flex items-center gap-2 sm:w-44 shrink-0">
+                        <span class="text-sm sm:text-base tracking-wider font-bold text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg sm:text-xl">call</span> 전화번호
+                        </span>
+                    </div>
+                    <div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <p id="info-phone" class="text-xl sm:text-2xl font-bold text-primary font-display-lg">02-554-7010</p>
+                        <a id="info-phone-link" href="tel:02-554-7010" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-primary hover:text-secondary underline underline-offset-4 transition-colors whitespace-nowrap shrink-0">
+                            <span class="material-symbols-outlined text-base">phone_in_talk</span> 전화 문의
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Row 4: 상담 및 예약 -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-8 py-2">
+                    <div class="flex items-center gap-2 sm:w-44 shrink-0">
+                        <span class="text-sm sm:text-base tracking-wider font-bold text-secondary flex items-center gap-2">
+                            <span class="material-symbols-outlined text-lg sm:text-xl">event_available</span> 상담 및 예약
+                        </span>
+                    </div>
+                    <div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <p class="text-base sm:text-lg font-semibold">
+                            1:1 프라이빗 방문 상담 <span class="text-sm text-outline font-normal ml-2">(전문 인테리어 디자이너의 체형 및 공간 컨설팅)</span>
+                        </p>
+                        <button onclick="openReservationModal()" class="py-2.5 px-5 bg-primary text-white font-bold text-xs sm:text-sm uppercase tracking-wider rounded hover:bg-primary-container transition-colors shadow-sm inline-flex items-center justify-center gap-2 shrink-0">
+                            <span class="material-symbols-outlined text-base">calendar_month</span> 방문 예약하기
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 4. Map Section (지도) -->
+        <section class="w-full mt-32 sm:mt-44 pt-20 sm:pt-28 border-t border-outline-variant/60">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10 sm:mb-12">
+                <div>
+                    <span class="text-xs uppercase tracking-widest font-bold text-secondary">MAP & DIRECTIONS</span>
+                    <h3 class="font-display-lg text-3xl text-primary font-normal mt-1">오시는 길</h3>
+                </div>
+
+                <!-- Navigation Quick Links -->
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <a id="btn-map-kakao" href="https://map.kakao.com" target="_blank" class="px-3.5 py-2 bg-[#FEE500] text-[#191919] font-bold rounded flex items-center gap-1 hover:opacity-90 transition-opacity">
+                        <span class="material-symbols-outlined text-base">near_me</span> 카카오맵 길찾기
+                    </a>
+                    <a id="btn-map-naver" href="https://map.naver.com" target="_blank" class="px-3.5 py-2 bg-[#03CF5D] text-white font-bold rounded flex items-center gap-1 hover:opacity-90 transition-opacity">
+                        <span class="material-symbols-outlined text-base">map</span> 네이버지도 길찾기
+                    </a>
+                </div>
+            </div>
+
+            <!-- Custom Interactive Styled Vector Map Display Container -->
+            <div class="relative w-full h-[360px] sm:h-[440px] rounded-lg overflow-hidden border border-outline-variant/60 bg-[#f4f3f0]">
+                
+                <!-- Simulated Map Graphic Canvas -->
+                <div id="map-graphic-canvas" class="w-full h-full relative overflow-hidden bg-[#e5e3df]">
+                    <!-- Map Roads grid simulation -->
+                    <svg class="absolute inset-0 w-full h-full opacity-60" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="0" y1="200" x2="100%" y2="200" stroke="#ffffff" stroke-width="24" />
+                        <line x1="0" y1="200" x2="100%" y2="200" stroke="#fbd49d" stroke-width="12" />
+                        <line x1="300" y1="0" x2="300" y2="100%" stroke="#ffffff" stroke-width="20" />
+                        <line x1="300" y1="0" x2="300" y2="100%" stroke="#e6e4df" stroke-width="10" />
+                        <circle cx="300" cy="200" r="40" fill="none" stroke="#ffffff" stroke-width="14" />
+                        <!-- Subway icon graphic node -->
+                        <circle cx="300" cy="200" r="16" fill="#172119" />
+                        <text x="300" y="205" fill="#ffffff" font-size="11" font-weight="bold" text-anchor="middle">STN</text>
+                    </svg>
+
+                    <!-- Interactive Pin Marker -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-full z-20 flex flex-col items-center cursor-pointer group">
+                        <!-- Pin Popup Card -->
+                        <div class="mb-2 px-4 py-2 bg-primary text-white rounded-lg shadow-xl text-center border border-white/20 group-hover:scale-105 transition-transform">
+                            <span id="map-pin-title" class="font-bold text-xs sm:text-sm block">RELEXIA 강남 플래그십</span>
+                            <span class="text-[10px] text-amber-300">1:1 맞춤 컨설팅 쇼룸</span>
+                        </div>
+                        <!-- Pin Icon -->
+                        <div class="w-10 h-10 rounded-full bg-primary text-white border-2 border-white flex items-center justify-center shadow-lg transform group-hover:bounce">
+                            <span class="material-symbols-outlined text-xl text-amber-300">location_on</span>
+                        </div>
+                        <div class="w-3 h-1 bg-black/30 rounded-full blur-[1px] mt-0.5"></div>
+                    </div>
+
+                    <!-- Map Control Buttons -->
+                    <div class="absolute bottom-4 right-4 z-20 flex flex-col gap-1 shadow-md bg-white rounded overflow-hidden">
+                        <button onclick="mapZoomIn()" class="w-8 h-8 flex items-center justify-center hover:bg-surface-container text-primary font-bold border-b border-outline-variant/30">+</button>
+                        <button onclick="mapZoomOut()" class="w-8 h-8 flex items-center justify-center hover:bg-surface-container text-primary font-bold">-</button>
+                    </div>
+
+                    <!-- Map Brand Tag -->
+                    <div class="absolute top-4 left-4 z-20 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded border border-outline-variant/40 text-xs font-semibold text-primary flex items-center gap-1.5 shadow-sm">
+                        <span class="material-symbols-outlined text-sm text-primary">pin_drop</span>
+                        <span id="map-location-tag">서울 강남점 위치 지도</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parking & Public Transit Info -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 text-xs sm:text-sm">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-xl mt-0.5">subway</span>
+                    <div>
+                        <h5 class="font-bold text-primary mb-1 text-sm sm:text-base">대중교통 이용 안내</h5>
+                        <p id="transit-info-text" class="text-outline leading-relaxed">
+                            지하철 2호선 / 수인분당선 선릉역 10번 출구에서 직진 도보 3분 거리 (테헤란로 대로변 위치)
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-xl mt-0.5">directions_car</span>
+                    <div>
+                        <h5 class="font-bold text-primary mb-1 text-sm sm:text-base">주차 및 발렛 안내</h5>
+                        <p id="parking-info-text" class="text-outline leading-relaxed">
+                            건물 지하 지하주차장 2시간 무료 주차 지원 (매장 방문 시 무료 발렛 파킹 서비스 제공)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</main>
+
+
+<!-- Footer -->
+<footer class="bg-white border-t border-outline-variant/40 w-full mt-20">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6 px-margin-mobile md:px-margin-desktop py-10 max-w-container-max mx-auto text-xs text-outline">
+        <div class="flex items-center gap-4">
+            <a href="index.html" class="font-display-lg text-2xl font-bold text-primary tracking-tight">RELEXIA</a>
+            <span>© 2024 RELEXIA. All rights reserved.</span>
+        </div>
+        <div class="flex gap-6 font-medium">
+            <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="index.html#showroom" class="hover:text-primary transition-colors">Homepage Showroom</a>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Interactive 1:1 Visit Reservation Modal (방문 상담 예약 모달) -->
+<div id="reservation-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest w-full max-w-lg rounded-2xl shadow-2xl border border-outline-variant/60 overflow-hidden transform transition-all">
+        <!-- Modal Header -->
+        <div class="p-6 bg-primary text-white flex justify-between items-center">
+            <div>
+                <span class="text-[10px] uppercase tracking-widest text-amber-300 font-bold">RELEXIA VIP CONSULTING</span>
+                <h3 class="font-display-lg text-2xl font-normal">1:1 프라이빗 쇼룸 방문 예약</h3>
+            </div>
+            <button onclick="closeReservationModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors">
+                <span class="material-symbols-outlined text-lg">close</span>
+            </button>
+        </div>
+
+        <!-- Modal Form Body -->
+        <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="p-6 space-y-4">
+            <!-- Branch Selection -->
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-secondary mb-1.5">방문 지점 선택</label>
+                <select id="modal-branch-select" class="w-full px-4 py-2.5 bg-surface-container border border-outline-variant rounded-lg text-sm text-primary font-medium focus:ring-2 focus:ring-primary focus:outline-none">
+                    <option value="강남점">서울 강남 플래그십 스토어</option>
+                    <option value="영등포점">서울 영등포 스튜디오</option>
+                    <option value="해운대점">부산 해운대 센텀점</option>
+                </select>
+            </div>
+
+            <!-- Date & Time Row -->
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-secondary mb-1.5">방문 희망일</label>
+                    <input type="date" required id="modal-date-input" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant rounded-lg text-sm text-primary focus:ring-2 focus:ring-primary focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-secondary mb-1.5">방문 희망시간</label>
+                    <select required id="modal-time-select" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant rounded-lg text-sm text-primary focus:ring-2 focus:ring-primary focus:outline-none">
+                        <option value="11:00">오전 11:00</option>
+                        <option value="13:30">오후 01:30</option>
+                        <option value="15:00">오후 03:00</option>
+                        <option value="17:00">오후 05:00</option>
+                        <option value="19:00">오후 07:00</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Name & Phone Row -->
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-secondary mb-1.5">성함</label>
+                    <input type="text" required placeholder="홍길동" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant rounded-lg text-sm text-primary focus:ring-2 focus:ring-primary focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-secondary mb-1.5">연락처</label>
+                    <input type="tel" required placeholder="010-0000-0000" class="w-full px-3 py-2.5 bg-surface-container border border-outline-variant rounded-lg text-sm text-primary focus:ring-2 focus:ring-primary focus:outline-none">
+                </div>
+            </div>
+
+            <!-- Interest Product -->
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-secondary mb-1.5">관심 제품 (선택)</label>
+                <div class="grid grid-cols-3 gap-2 text-xs">
+                    <label class="flex items-center gap-1.5 p-2 bg-surface-container rounded cursor-pointer border border-transparent hover:border-outline-variant">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary"> 3-4인용 소파
+                    </label>
+                    <label class="flex items-center gap-1.5 p-2 bg-surface-container rounded cursor-pointer border border-transparent hover:border-outline-variant">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary"> 모듈러 소파
+                    </label>
+                    <label class="flex items-center gap-1.5 p-2 bg-surface-container rounded cursor-pointer border border-transparent hover:border-outline-variant">
+                        <input type="checkbox" class="rounded text-primary focus:ring-primary"> 1인 리클라이너
+                    </label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-2">
+                <button type="submit" class="w-full py-3.5 bg-primary text-white font-bold text-sm uppercase tracking-widest rounded-lg hover:bg-primary-container transition-colors shadow-md">
+                    방문 예약 완료하기
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Toast Notification Element -->
+<div id="toast-notification" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 hidden bg-primary text-white px-6 py-3 rounded-full shadow-2xl border border-white/20 text-sm font-semibold items-center gap-2">
+    <span class="material-symbols-outlined text-amber-300 text-base">check_circle</span>
+    <span id="toast-message">주소가 복사되었습니다.</span>
+</div>
+
+
+<!-- JavaScript Logic for Store Tabs, Image Slider, Map & Modals -->
+<script>
+// Data Store for all 3 Showrooms
+const storeData = {
+    gangnam: {
+        badge: "FLAGSHIP STORE",
+        title: "서울 강남 플래그십 쇼룸",
+        address: "서울특별시 강남구 테헤란로 427 릴렉시아 플래그십 스토어 1-3층",
+        addressSub: "(2호선/수인분당선 선릉역 10번 출구 도보 3분)",
+        phone: "02-554-7010",
+        transit: "지하철 2호선/수인분당선 선릉역 10번 출구에서 테헤란로 방향 직진 250m",
+        parking: "건물 전용 지하 주차장 2시간 무료 발렛 주차 지원",
+        kakaoUrl: "https://map.kakao.com/link/search/서울특별시 강남구 테헤란로 427",
+        naverUrl: "https://map.naver.com/v5/search/서울특별시 강남구 테헤란로 427",
+        slides: [
+            {
+                src: "images/showroom/caroline-badran-in2D_wh4sq8-unsplash.jpg",
+                position: "50% 85%",
+                title: "메인 라운지 & 라이프스타일 갤러리",
+                desc: "릴렉시아 대표 시그니처 소파 라인업을 최고급 인테리어 연출과 함께 감상할 수 있는 메인 홀입니다."
+            },
+            {
+                src: "images/showroom/kam-idris-wF9NH87U-2E-unsplash.jpg",
+                position: "50% 62%",
+                title: "1:1 퍼스널 컨설팅 스튜디오",
+                desc: "전담 디자이너와 함께 커스텀 가죽, 패브릭 컬러 샘플 및 착석감을 매치해보는 프라이빗 공간입니다."
+            },
+            {
+                src: "images/showroom/michiel-annaert-5lLLAxNpAys-unsplash.jpg",
+                position: "50% 75%",
+                title: "프리미엄 레더 & 테일러드 아틀리에",
+                desc: "이탈리아 최고급 천연 가죽 소재와 세라믹 매칭 가구를 직접 만져보고 선택하실 수 있습니다."
+            },
+            {
+                src: "images/showroom/amir-gorji-nYujI8tEvV8-unsplash.jpg",
+                position: "50% 65%",
+                title: "모던 리빙 & 휴식 체험 존",
+                desc: "실제 거실 조명 환경을 재현하여 집 안에서의 편안함을 그대로 미리 체험할 수 있습니다."
+            }
+        ]
+    },
+    yeongdeungpo: {
+        badge: "URBAN LOUNGE",
+        title: "서울 영등포 센트럴 쇼룸",
+        address: "서울특별시 영등포구 여의대로 108 릴렉시아 쇼룸 타워 2층",
+        addressSub: "(5호선/9호선 여의도역 3번 출구 연결)",
+        phone: "02-2630-7010",
+        transit: "지하철 5호선/9호선 여의도역 지하 직접 연결 통로 이용",
+        parking: "쇼룸 타워 건물 지하 1-4층 3시간 무료 주차",
+        kakaoUrl: "https://map.kakao.com/link/search/서울특별시 영등포구 여의대로 108",
+        naverUrl: "https://map.naver.com/v5/search/서울특별시 영등포구 여의대로 108",
+        slides: [
+            {
+                src: "images/showroom/costa-live-BzogOj2XqPI-unsplash.jpg",
+                position: "50% 50%",
+                title: "영등포 어반 리빙 갤러리",
+                desc: "도심 속 탁 트인 개방감을 선사하는 영등포 쇼룸의 메인 디스플레이 존입니다."
+            },
+            {
+                src: "images/showroom/marin-huang-_LqrdRQlZ9I-unsplash.jpg",
+                position: "50% 70%",
+                title: "모듈러 커스터마이징 존",
+                desc: "다양한 형태와 배치 변경이 가능한 모듈 소파의 유연한 조합을 확인해보세요."
+            },
+            {
+                src: "images/showroom/costa-live-6VHRSGddX3E-unsplash.jpg",
+                position: "50% 50%",
+                title: "크래프트맨쉽 & 마감 라이브러리",
+                desc: "릴렉시아 소파 내부 내장재, 쿠션폼, 최고급 패브릭의 내구성을 직접 검증해보실 수 있습니다."
+            },
+            {
+                src: "images/showroom/sherzod-gulomov-P0q_HK_-GGM-unsplash.jpg",
+                position: "50% 50%",
+                title: "미니멀 & 패브릭 테마 라운지",
+                desc: "발수, 이지클린 기능성 패브릭 소파를 직관적으로 체험하고 오염 관리 팁을 받아보세요."
+            }
+        ]
+    },
+    haeundae: {
+        badge: "CENTUM OCEAN VIEW",
+        title: "부산 해운대 센텀 스토어",
+        address: "부산광역시 해운대구 해운대해변로 298 릴렉시아 부산 센텀점 1-2층",
+        addressSub: "(2호선 센텀시티역 1번 출구 도보 5분)",
+        phone: "051-740-7010",
+        transit: "지하철 2호선 센텀시티역 1번 출구에서 해운대 해변 방면 300m",
+        parking: "센텀점 지상 및 지하 주차장 2시간 무료 주차 지원",
+        kakaoUrl: "https://map.kakao.com/link/search/부산광역시 해운대구 해운대해변로 298",
+        naverUrl: "https://map.naver.com/v5/search/부산광역시 해운대구 해운대해변로 298",
+        slides: [
+            {
+                src: "images/showroom/phillip-goldsberry-fZuleEfeA1Q-unsplash.jpg",
+                position: "50% 50%",
+                title: "해운대 프리미엄 센텀 갤러리",
+                desc: "부산 센텀시티의 탁 트인 뷰와 어우러진 최고급 시그니처 소파 존입니다."
+            },
+            {
+                src: "images/showroom/ikshana-productions-Oqtpdw-nF-E-unsplash.jpg",
+                position: "50% 50%",
+                title: "오션 라운지 & 소재 스튜디오",
+                desc: "소파 가죽 한 땀 한 땀 장인의 정성이 담긴 디테일을 체험하는 공간입니다."
+            },
+            {
+                src: "images/showroom/sven-brandsma-GZ5cKOgeIB0-unsplash.jpg",
+                position: "50% 35%",
+                title: "RELEXIA 센텀 컬렉션 스위트",
+                desc: "인체공학적 서포트 라인이 돋보이는 소파의 깊은 안락감을 경험할 수 있습니다."
+            },
+            {
+                src: "images/showroom/poojan-thanekar-XWRW66qiRp8-unsplash.jpg",
+                position: "50% 50%",
+                title: "RELEXIA 테라스 라운지",
+                desc: "넓은 거실에 어울리는 대형 L자형 모듈러 소파가 전시된 테라스 콘셉트 룸입니다."
+            }
+        ]
+    }
+};
+
+let currentStoreKey = 'gangnam';
+let currentSlideIndex = 0;
+
+// Preload all slide images to prevent image position jump/flash
+function preloadShowroomImages() {
+    Object.values(storeData).forEach(store => {
+        store.slides.forEach(slide => {
+            const img = new Image();
+            img.src = slide.src;
+        });
+    });
+}
+
+// Initialize Page
+document.addEventListener('DOMContentLoaded', () => {
+    preloadShowroomImages();
+
+    // Set default date input to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const dateStr = tomorrow.toISOString().split('T')[0];
+    const dateInput = document.getElementById('modal-date-input');
+    if (dateInput) dateInput.value = dateStr;
+
+    // Render Store Content
+    renderStoreUI(currentStoreKey);
+});
+
+// Switch Tab Handler
+function switchTab(storeKey) {
+    if (currentStoreKey === storeKey) return;
+    currentStoreKey = storeKey;
+    currentSlideIndex = 0;
+
+    // Update tab button styles
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('tab-active');
+        btn.classList.add('tab-inactive');
+    });
+
+    const activeBtn = document.getElementById(`tab-btn-${storeKey}`);
+    if (activeBtn) {
+        activeBtn.classList.remove('tab-inactive');
+        activeBtn.classList.add('tab-active');
+    }
+
+    // Animate content update
+    const container = document.getElementById('store-content-container');
+    gsap.to(container, {
+        opacity: 0,
+        y: 10,
+        duration: 0.2,
+        onComplete: () => {
+            renderStoreUI(storeKey);
+            gsap.to(container, { opacity: 1, y: 0, duration: 0.3 });
+        }
+    });
+}
+
+// Render UI elements based on selected store
+function renderStoreUI(storeKey) {
+    const data = storeData[storeKey];
+    if (!data) return;
+
+    // 1. Text elements
+    document.getElementById('info-address').textContent = data.address;
+    document.getElementById('info-address-sub').textContent = data.addressSub;
+    document.getElementById('info-phone').textContent = data.phone;
+    document.getElementById('info-phone-link').href = `tel:${data.phone}`;
+    document.getElementById('transit-info-text').textContent = data.transit;
+    document.getElementById('parking-info-text').textContent = data.parking;
+    document.getElementById('btn-map-kakao').href = data.kakaoUrl;
+    document.getElementById('btn-map-naver').href = data.naverUrl;
+    document.getElementById('map-pin-title').textContent = data.title;
+    document.getElementById('map-location-tag').textContent = `${data.title} 위치 지도`;
+    document.getElementById('modal-branch-select').value = storeKey === 'gangnam' ? '강남점' : (storeKey === 'yeongdeungpo' ? '영등포점' : '해운대점');
+
+    // 2. Render Slide Dots & View
+    renderSlideDots();
+    updateSlideView();
+}
+
+// Render Slide Dots Indicator
+function renderSlideDots() {
+    const data = storeData[currentStoreKey];
+    const dotsContainer = document.getElementById('slide-dots-container');
+    if (!dotsContainer || !data) return;
+
+    dotsContainer.innerHTML = '';
+    data.slides.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.ariaLabel = `Slide ${idx + 1}`;
+        dot.onclick = () => goToSlide(idx);
+        dotsContainer.appendChild(dot);
+    });
+}
+
+// Update Slide Display
+function updateSlideView() {
+    const data = storeData[currentStoreKey];
+    const slide = data.slides[currentSlideIndex];
+    if (!slide) return;
+
+    // Image update instantly without position jump or flash
+    const imgEl = document.getElementById('main-slide-img');
+    imgEl.style.opacity = '1';
+    
+    const applySlide = () => {
+        imgEl.style.objectPosition = slide.position || 'center center';
+        imgEl.src = slide.src;
+    };
+
+    const tempImg = new Image();
+    tempImg.src = slide.src;
+    if (tempImg.complete) {
+        applySlide();
+    } else {
+        tempImg.onload = applySlide;
+    }
+
+    // Update Dots Active Indicator
+    const dots = document.querySelectorAll('#slide-dots-container > button');
+    dots.forEach((dot, idx) => {
+        if (idx === currentSlideIndex) {
+            dot.className = 'w-7 h-2.5 bg-white rounded-full transition-all shadow-sm';
+        } else {
+            dot.className = 'w-2.5 h-2.5 bg-white/40 hover:bg-white/80 rounded-full transition-all';
+        }
+    });
+}
+
+// Slide Navigation
+function nextSlide() {
+    const data = storeData[currentStoreKey];
+    currentSlideIndex = (currentSlideIndex + 1) % data.slides.length;
+    updateSlideView();
+}
+
+function prevSlide() {
+    const data = storeData[currentStoreKey];
+    currentSlideIndex = (currentSlideIndex - 1 + data.slides.length) % data.slides.length;
+    updateSlideView();
+}
+
+function goToSlide(index) {
+    currentSlideIndex = index;
+    updateSlideView();
+}
+
+// Copy Address with Toast Notification
+function copyAddress() {
+    const addressText = document.getElementById('info-address').textContent;
+    navigator.clipboard.writeText(addressText).then(() => {
+        showToast("쇼룸 주소가 클립보드에 복사되었습니다!");
+    }).catch(() => {
+        showToast("주소 복사에 실패했습니다.");
+    });
+}
+
+// Show Toast
+function showToast(msg) {
+    const toast = document.getElementById('toast-notification');
+    const msgEl = document.getElementById('toast-message');
+    msgEl.textContent = msg;
+    toast.classList.remove('hidden');
+    toast.classList.add('flex', 'toast-animate');
+
+    setTimeout(() => {
+        toast.classList.add('hidden');
+        toast.classList.remove('flex', 'toast-animate');
+    }, 3000);
+}
+
+// Reservation Modal Open/Close
+function openReservationModal() {
+    const modal = document.getElementById('reservation-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function closeReservationModal() {
+    const modal = document.getElementById('reservation-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+// Handle Reservation Submission
+function handleReservationSubmit(e) {
+    e.preventDefault();
+    closeReservationModal();
+    showToast("방문 예약이 성공적으로 접수되었습니다. 담당 디자이너가 안내 드리겠습니다.");
+}
+
+// Map Controls Simulation
+let mapScale = 1;
+function mapZoomIn() {
+    mapScale = Math.min(mapScale + 0.2, 1.8);
+    document.getElementById('map-graphic-canvas').style.transform = `scale(${mapScale})`;
+    document.getElementById('map-graphic-canvas').style.transition = 'transform 0.3s ease';
+}
+
+function mapZoomOut() {
+    mapScale = Math.max(mapScale - 0.2, 0.8);
+    document.getElementById('map-graphic-canvas').style.transform = `scale(${mapScale})`;
+    document.getElementById('map-graphic-canvas').style.transition = 'transform 0.3s ease';
+}
+</script>
+
+</body>
+</html>

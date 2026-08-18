@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signature Collections | RELEXIA</title>
+<meta name="description" content="릴렉시아 시그니처 소파 컬렉션. 1인용, 2인용, 3인용, 4인용 모듈 소파 라인업을 만나보세요.">
+
+<!-- Tailwind CSS via CDN with Custom Configuration -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: '#242b26',
+                    'on-primary': '#ffffff',
+                    'primary-container': '#434b46',
+                    'on-primary-container': '#e1e9e3',
+                    surface: '#ffffff',
+                    'surface-container': '#ffffff',
+                    'surface-container-lowest': '#ffffff',
+                    'surface-container-low': '#f5f4f0',
+                    'on-surface': '#1b1c1d',
+                    'on-surface-variant': '#444746',
+                    outline: '#747775',
+                    'outline-variant': '#c4c7c5',
+                },
+                fontFamily: {
+                    sans: ['"Noto Serif KR"', 'Garamond', 'Georgia', 'serif'],
+                    body: ['"Noto Serif KR"', 'Garamond', 'Georgia', 'serif'],
+                    display: ['"EB Garamond"', '"Noto Serif KR"', 'serif'],
+                    'display-lg': ['"EB Garamond"', 'serif'],
+                },
+                spacing: {
+                    'margin-desktop': '5rem',
+                    'margin-mobile': '1.5rem',
+                    'container-max': '1400px',
+                }
+            }
+        }
+    }
+</script>
+
+<!-- Google Fonts & Material Symbols -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+
+<style>
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .tab-btn.tab-active {
+        color: #242b26;
+        border-color: #242b26;
+        font-weight: 700;
+    }
+    .tab-btn.tab-inactive {
+        color: #747775;
+        border-color: transparent;
+        font-weight: 400;
+    }
+    .tab-btn.tab-inactive:hover {
+        color: #242b26;
+    }
+
+    @keyframes slideUpFade {
+        0% { opacity: 0; transform: translate(-50%, 20px); }
+        100% { opacity: 1; transform: translate(-50%, 0); }
+    }
+    .toast-animate {
+        animation: slideUpFade 0.3s ease-out forwards;
+    }
+</style>
+</head>
+
+<body class="bg-white text-on-surface font-body antialiased selection:bg-primary selection:text-white">
+
+<!-- Top Fixed Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-outline-variant/30 transition-all duration-300">
+    <div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 w-full max-w-container-max mx-auto">
+        <div class="flex items-center gap-6">
+            <a href="index.html?nointro=true" class="cursor-pointer font-display text-2xl sm:text-3xl text-primary tracking-tight font-bold hover:opacity-80 transition-opacity">RELEXIA</a>
+            <span class="hidden sm:inline-block text-xs text-outline tracking-widest uppercase font-semibold border-l border-outline-variant pl-4">Collections</span>
+        </div>
+        <div class="flex gap-6 sm:gap-8 items-center text-sm font-medium">
+            <a href="index.html?nointro=true" class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+                <span class="material-symbols-outlined text-lg">home</span>
+                <span class="hidden sm:inline">홈으로</span>
+            </a>
+            <a href="collection.html" class="text-primary font-bold border-b-2 border-primary pb-0.5">Collections</a>
+            <a href="showroom.html" class="text-on-surface-variant hover:text-primary transition-colors">Showroom</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Header Section (상단 배경 사진 적용) -->
+<header class="relative w-full min-h-[460px] md:min-h-[560px] pt-24 pb-16 px-margin-mobile md:px-margin-desktop flex items-center justify-center overflow-hidden">
+    <!-- Header Background Image -->
+    <div class="absolute inset-0 z-0">
+        <img src="images/gray-sofa-brown-living-room-with-copy-space.jpg" alt="RELEXIA Signature Collections Header Background" class="w-full h-full object-cover object-center scale-105 transform transition-transform duration-1000">
+        <!-- Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-primary/40"></div>
+    </div>
+
+    <!-- Hero Content Overlay -->
+    <div class="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
+        <h1 class="font-display text-4xl sm:text-6xl md:text-7xl font-normal tracking-wide text-white mb-6 leading-tight">
+            SIGNATURE COLLECTIONS
+        </h1>
+        
+        <p class="text-base sm:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed font-light">
+            최상급 천연 소재와 인체공학적 디테일이 빚어낸 릴렉시아의 소파 컬렉션.<br class="hidden sm:inline">
+            나만의 공간에 어울리는 완벽한 크기와 아늑함을 경험해 보세요.
+        </p>
+    </div>
+</header>
+
+<!-- Main Content Area -->
+<main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20 md:py-28">
+
+    <!-- Category Filter Tabs Section (ALL / 1인용 / 2인용 / 3인용 / 4인용) -->
+    <section class="w-full mb-16 sm:mb-20 flex justify-center" id="collections-tabs-section">
+        <div class="w-full max-w-3xl border-b border-outline-variant/60">
+            <div class="flex items-center justify-center gap-4 sm:gap-10 md:gap-14 w-full mx-auto overflow-x-auto no-scrollbar">
+                <button onclick="filterCategory('ALL')" id="tab-btn-ALL" class="tab-btn tab-active pb-4 text-base sm:text-xl md:text-2xl font-display tracking-wide border-b-2 transition-all whitespace-nowrap px-3 sm:px-5 text-center">
+                    ALL
+                </button>
+                <button onclick="filterCategory('1인용')" id="tab-btn-1인용" class="tab-btn tab-inactive pb-4 text-base sm:text-xl md:text-2xl font-display tracking-wide border-b-2 transition-all whitespace-nowrap px-3 sm:px-5 text-center">
+                    1인용
+                </button>
+                <button onclick="filterCategory('2인용')" id="tab-btn-2인용" class="tab-btn tab-inactive pb-4 text-base sm:text-xl md:text-2xl font-display tracking-wide border-b-2 transition-all whitespace-nowrap px-3 sm:px-5 text-center">
+                    2인용
+                </button>
+                <button onclick="filterCategory('3인용')" id="tab-btn-3인용" class="tab-btn tab-inactive pb-4 text-base sm:text-xl md:text-2xl font-display tracking-wide border-b-2 transition-all whitespace-nowrap px-3 sm:px-5 text-center">
+                    3인용
+                </button>
+                <button onclick="filterCategory('4인용')" id="tab-btn-4인용" class="tab-btn tab-inactive pb-4 text-base sm:text-xl md:text-2xl font-display tracking-wide border-b-2 transition-all whitespace-nowrap px-3 sm:px-5 text-center">
+                    4인용
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 3-Column Product Grid Container (3열 구조) -->
+    <section id="products-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 sm:gap-x-10 md:gap-x-12 gap-y-12 sm:gap-y-16 md:gap-y-20">
+        <!-- Dynamically rendered product cards -->
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full bg-white text-on-surface-variant border-t border-outline-variant/30 py-16 px-margin-mobile md:px-margin-desktop">
+    <div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div>
+            <h3 class="font-display text-2xl font-bold text-primary tracking-tight mb-2">RELEXIA</h3>
+            <p class="text-sm text-outline leading-relaxed max-w-md">
+                RELEXIA Furniture Group &copy; 2026. All rights reserved.<br>
+                서울특별시 강남구 테헤란로 427 릴렉시아 타워
+            </p>
+        </div>
+        <div class="flex gap-6 text-sm font-medium text-on-surface-variant">
+            <a href="index.html" class="hover:text-primary transition-colors">메인 홈</a>
+            <a href="collection.html" class="hover:text-primary transition-colors">컬렉션</a>
+            <a href="showroom.html" class="hover:text-primary transition-colors">쇼룸 위치</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Toast Notification Popup -->
+<div id="toast-container" class="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 hidden pointer-events-none">
+    <div id="toast-body" class="bg-primary text-white px-6 py-3.5 rounded-full shadow-2xl flex items-center gap-3 text-sm font-medium backdrop-blur-md">
+        <span id="toast-icon" class="material-symbols-outlined text-lg text-emerald-400">check_circle</span>
+        <span id="toast-message">알림 메시지</span>
+    </div>
+</div>
+
+<!-- JavaScript Data & Interactivity -->
+<script>
+    // Comprehensive Product Dataset categorized into 1인용, 2인용, 3인용, 4인용
+    const productsData = [
+        {
+            id: 1,
+            name: "RELEXIA Olive Lounge",
+            category: "3인용",
+            price: "₩ 3,850,000",
+            priceNum: 3850000,
+            image: "images/collections/7010.png",
+            desc: "인체공학적 착좌감의 프리미엄 올리브 라인 3인용 소파"
+        },
+        {
+            id: 2,
+            name: "RELEXIA Classic Soft",
+            category: "2인용",
+            price: "₩ 2,980,000",
+            priceNum: 2980000,
+            image: "images/collections/7648.png",
+            desc: "최상급 친환경 패브릭 샌드 베이지 2인용 소파"
+        },
+        {
+            id: 3,
+            name: "RELEXIA Modern Velvet",
+            category: "2인용",
+            price: "₩ 3,450,000",
+            priceNum: 3450000,
+            image: "images/collections/0addfb45-bbe7-4a8b-885d-a50bfa5369d6.png",
+            desc: "부드러운 실크 벨벳 텍스처 2인용 컴포트 소파"
+        },
+        {
+            id: 4,
+            name: "RELEXIA Minimal Studio",
+            category: "3인용",
+            price: "₩ 4,200,000",
+            priceNum: 4200000,
+            image: "images/collections/3d4c42d6-2249-48a3-9418-63fedf3379e5.png",
+            desc: "공간감을 극대화하는 미니멀 스튜디오 3인용 스페셜"
+        },
+        {
+            id: 5,
+            name: "RELEXIA Leather Module",
+            category: "4인용",
+            price: "₩ 5,100,000",
+            priceNum: 5100000,
+            image: "images/collections/9ee509ab-19ba-4847-be4b-06d9867d2d5b.png",
+            desc: "이탈리아 풀그레인 천연 가죽 4인용 패밀리 모듈 소파"
+        },
+        {
+            id: 6,
+            name: "RELEXIA Natural Comfort",
+            category: "2인용",
+            price: "₩ 3,150,000",
+            priceNum: 3150000,
+            image: "images/collections/e541553d-9472-406c-b048-95709a69bbb6.png",
+            desc: "자연 친화적 린넨 코튼 믹스 2인용 모듈형 소파"
+        },
+        {
+            id: 7,
+            name: "RELEXIA Urban Soft",
+            category: "1인용",
+            price: "₩ 1,580,000",
+            priceNum: 1580000,
+            image: "images/collections/973e2cf0-774a-49ea-b8d3-e20de3443b19.png",
+            desc: "도심 속 프라이빗 공간을 위한 어반 패브릭 1인용 라운지 소파"
+        },
+        {
+            id: 8,
+            name: "RELEXIA Mono Velvet",
+            category: "1인용",
+            price: "₩ 1,680,000",
+            priceNum: 1680000,
+            image: "images/collections/0cb29e1d-18f6-4026-a1ee-5d6433eca3e0.png",
+            desc: "부드러운 벨벳 텍스처와 포근한 감성의 1인용 릴렉스 체어"
+        },
+        {
+            id: 9,
+            name: "RELEXIA Personal Leather",
+            category: "1인용",
+            price: "₩ 1,950,000",
+            priceNum: 1950000,
+            image: "images/collections/1312a31b-6ef4-47c2-bd42-30383ae84836.png",
+            desc: "이탈리아 천연 풀그레인 가죽 마감의 프라이빗 1인 체어"
+        },
+        {
+            id: 10,
+            name: "RELEXIA Urban Compact",
+            category: "1인용",
+            price: "₩ 1,450,000",
+            priceNum: 1450000,
+            image: "images/collections/0a03a4f5-3d0e-4a4e-8a59-456cc713ce51.png",
+            desc: "나만의 안락한 휴식을 위한 콤팩트 1인용 프리미엄 암체어"
+        },
+        {
+            id: 11,
+            name: "RELEXIA Minimal Duo",
+            category: "2인용",
+            price: "₩ 2,850,000",
+            priceNum: 2850000,
+            image: "images/collections/4ae037af-4d53-41ba-b766-ce8b8819d9bc.png",
+            desc: "슬림한 프레임과 모던 라인의 2인용 패브릭 소파"
+        },
+        {
+            id: 12,
+            name: "RELEXIA Cozy Fabric",
+            category: "2인용",
+            price: "₩ 3,050,000",
+            priceNum: 3050000,
+            image: "images/collections/c8cda5d1-9dcd-4115-bf29-780f84d5279c.png",
+            desc: "아늑하고 포근한 분위기를 연출하는 2인용 릴렉스 소파"
+        },
+        {
+            id: 13,
+            name: "RELEXIA Linen Haven",
+            category: "3인용",
+            price: "₩ 3,900,000",
+            priceNum: 3900000,
+            image: "images/collections/11212eb2-f60c-4797-80a1-4b56525fa153.png",
+            desc: "자연스러운 텍스처와 포근한 감성의 린넨 3인용 소파"
+        },
+        {
+            id: 14,
+            name: "RELEXIA Premium Relax",
+            category: "3인용",
+            price: "₩ 4,450,000",
+            priceNum: 4450000,
+            image: "images/collections/1f27c235-7853-41e9-a357-66163b43e02d.png",
+            desc: "인체공학적 백쿠션과 고밀도 폼의 프리미엄 3인용 라운지 소파"
+        },
+        {
+            id: 15,
+            name: "RELEXIA Warm Terrace",
+            category: "3인용",
+            price: "₩ 4,100,000",
+            priceNum: 4100000,
+            image: "images/collections/e3fbe1b8-c50e-4059-9b2e-7aa25244b07d.png",
+            desc: "따뜻한 질감과 세련된 디자인의 테라스 콘셉트 3인용 소파"
+        },
+        {
+            id: 16,
+            name: "RELEXIA Grand Family",
+            category: "4인용",
+            price: "₩ 4,850,000",
+            priceNum: 4850000,
+            image: "images/collections/2220c8c3-6ded-48e6-aa57-4c3d9b5eaa23.png",
+            desc: "넓은 거실을 위한 모던 4인용 릴렉스 모듈형 패브릭 소파"
+        },
+        {
+            id: 17,
+            name: "RELEXIA Royal Velvet",
+            category: "4인용",
+            price: "₩ 5,300,000",
+            priceNum: 5300000,
+            image: "images/collections/744fce3d-b06e-4d3f-a09a-3c03a9d3e301.png",
+            desc: "최고급 럭셔리 실크 벨벳 4인용 대형 라운지 소파"
+        },
+        {
+            id: 18,
+            name: "RELEXIA Noble Leather",
+            category: "4인용",
+            price: "₩ 5,600,000",
+            priceNum: 5600000,
+            image: "images/collections/f84f1833-2c9c-485b-98e8-5ce68825ba8d.png",
+            desc: "최상급 이탈리아 프리미엄 가죽 4인용 대형 패밀리 소파"
+        }
+    ];
+
+    let currentCategory = 'ALL';
+
+    // Render Product Cards Grid (3 Columns)
+    function renderProducts(category) {
+        const grid = document.getElementById('products-grid-container');
+
+        let filtered = productsData;
+        if (category !== 'ALL') {
+            filtered = productsData.filter(item => item.category === category);
+        }
+
+        // Clear grid
+        grid.innerHTML = '';
+
+        if (filtered.length === 0) {
+            grid.innerHTML = `
+                <div class="col-span-1 sm:col-span-2 md:col-span-3 text-center py-20 text-outline">
+                    <p class="text-lg">해당 카테고리의 제품이 없습니다.</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Populate Cards (3-column grid layout)
+        filtered.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'group cursor-pointer flex flex-col justify-between mb-4 sm:mb-6';
+            
+            card.innerHTML = `
+                <div>
+                    <!-- Image Box Container -->
+                    <div class="relative h-[200px] sm:h-[240px] md:h-[280px] bg-[#f9f8f6] rounded-md overflow-hidden flex items-center justify-center p-4 mb-4 transition-colors group-hover:bg-[#f2f0eb]">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105">
+                    </div>
+
+                    <!-- Title & Price -->
+                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 mb-2">
+                        <h3 class="text-base sm:text-lg font-medium text-primary group-hover:text-primary/80 transition-colors font-display tracking-tight">${product.name}</h3>
+                        <span class="text-sm sm:text-base font-semibold text-primary whitespace-nowrap">${product.price}</span>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="text-xs sm:text-sm text-on-surface-variant leading-relaxed line-clamp-2">${product.desc}</p>
+                </div>
+            `;
+
+            // Card click action
+            card.onclick = () => {
+                showToast(`${product.name} 상세 페이지 선택 (${product.category})`);
+            };
+
+            grid.appendChild(card);
+        });
+    }
+
+    // Filter Category Handler
+    function filterCategory(cat) {
+        currentCategory = cat;
+
+        // Update tab styles
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('tab-active');
+            btn.classList.add('tab-inactive');
+        });
+
+        const activeBtn = document.getElementById(`tab-btn-${cat}`);
+        if (activeBtn) {
+            activeBtn.classList.remove('tab-inactive');
+            activeBtn.classList.add('tab-active');
+        }
+
+        renderProducts(cat);
+    }
+
+    // Toast Notification helper
+    function showToast(msg) {
+        const container = document.getElementById('toast-container');
+        const messageEl = document.getElementById('toast-message');
+        if (!container || !messageEl) return;
+
+        messageEl.textContent = msg;
+        container.classList.remove('hidden');
+        container.classList.add('toast-animate');
+
+        setTimeout(() => {
+            container.classList.add('hidden');
+            container.classList.remove('toast-animate');
+        }, 2800);
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProducts('ALL');
+    });
+</script>
+
+</body>
+</html>
