@@ -1764,12 +1764,14 @@
     setTimeout(() => { introWheeling = false; }, 400);
   }, { passive: true });
 
-  // Interactive Cursor Reveal Lens Logic (Rounded Square Clear Reveal Window)
+  // Interactive Cursor Reveal Lens Logic (Auto Floating Infinity Loop + Touch Drag Tracking)
   let lensX = window.innerWidth / 2;
   let lensY = window.innerHeight / 2;
   let targetLensX = lensX;
   let targetLensY = lensY;
   let lensAnimFrame = null;
+  let userInteracted = false;
+  let userInteractTimer = null;
 
   function updateIntroCursorLens() {
     if (isLensExpanding) return;
@@ -1779,6 +1781,17 @@
 
     if (!sharpLayer || !cursorBox || !overlay || overlay.style.display === 'none') return;
 
+    // Auto Floating Infinity Loop trajectory when user is not actively moving mouse/touch
+    if (!userInteracted) {
+      const time = Date.now() * 0.00045; // Slow, calm, luxurious floating speed
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      const rx = Math.min(window.innerWidth * 0.28, 380);
+      const ry = Math.min(window.innerHeight * 0.22, 220);
+      targetLensX = cx + Math.sin(time) * rx;
+      targetLensY = cy + Math.sin(time * 2) * ry * 0.5;
+    }
+
     // Sync sharp video timestamp to blurred video timestamp
     const vBlur = document.getElementById('intro-video-blurred');
     const vSharp = document.getElementById('intro-video-sharp');
@@ -1786,12 +1799,13 @@
       vSharp.currentTime = vBlur.currentTime;
     }
 
-    // Smooth lerp follow
-    lensX += (targetLensX - lensX) * 0.22;
-    lensY += (targetLensY - lensY) * 0.22;
+    // Smooth lerp follow (slower factor when floating, responsive when user interacts)
+    const lerpSpeed = userInteracted ? 0.22 : 0.08;
+    lensX += (targetLensX - lensX) * lerpSpeed;
+    lensY += (targetLensY - lensY) * lerpSpeed;
 
-    const size = window.innerWidth < 640 ? 320 : 540;
-    const radius = window.innerWidth < 640 ? 40 : 64;
+    const size = window.innerWidth < 640 ? 280 : 540;
+    const radius = window.innerWidth < 640 ? 44 : 64;
     const half = size / 2;
 
     const left = lensX - half;
@@ -1812,17 +1826,37 @@
     lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
   }
 
+  function handleUserLensInteraction(x, y) {
+    userInteracted = true;
+    targetLensX = x;
+    targetLensY = y;
+
+    if (userInteractTimer) clearTimeout(userInteractTimer);
+    userInteractTimer = setTimeout(() => {
+      userInteracted = false;
+    }, 3000);
+  }
+
   window.addEventListener('mousemove', (e) => {
     const overlay = document.getElementById('site-intro-overlay');
     if (!overlay || overlay.style.display === 'none') return;
-
-    targetLensX = e.clientX;
-    targetLensY = e.clientY;
-
-    if (!lensAnimFrame) {
-      lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
-    }
+    handleUserLensInteraction(e.clientX, e.clientY);
+    if (!lensAnimFrame) lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
   });
+
+  window.addEventListener('touchmove', (e) => {
+    const overlay = document.getElementById('site-intro-overlay');
+    if (!overlay || overlay.style.display === 'none' || !e.touches || !e.touches[0]) return;
+    handleUserLensInteraction(e.touches[0].clientX, e.touches[0].clientY);
+    if (!lensAnimFrame) lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
+  }, { passive: true });
+
+  window.addEventListener('touchstart', (e) => {
+    const overlay = document.getElementById('site-intro-overlay');
+    if (!overlay || overlay.style.display === 'none' || !e.touches || !e.touches[0]) return;
+    handleUserLensInteraction(e.touches[0].clientX, e.touches[0].clientY);
+    if (!lensAnimFrame) lensAnimFrame = requestAnimationFrame(updateIntroCursorLens);
+  }, { passive: true });
 
   // Init Intro Overlay Sequence on DOMContentLoaded
   document.addEventListener('DOMContentLoaded', () => {

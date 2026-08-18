@@ -132,17 +132,17 @@
 <main class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20 md:py-28">
 
     <!-- 1. Tabs Section (서울 강남점 / 서울 영등포점 / 부산 해운대점) -->
-    <section class="w-full mb-20 sm:mb-24 flex justify-center" id="store-tabs-section">
+    <section class="w-full mb-12 sm:mb-24 flex justify-center" id="store-tabs-section">
         <div class="w-full max-w-3xl border-b border-outline-variant/60">
-            <!-- Store Tabs Buttons -->
-            <div class="flex items-center justify-center gap-3 sm:gap-12 w-full mx-auto overflow-x-auto no-scrollbar">
-                <button onclick="switchTab('gangnam')" id="tab-btn-gangnam" class="tab-btn tab-active pb-4 text-lg sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-2 sm:px-4 text-center">
+            <!-- Store Tabs Buttons: Mobile 2-column grid (2열 2행), Desktop flex row -->
+            <div class="grid grid-cols-2 sm:flex sm:items-center sm:justify-center gap-x-4 gap-y-3 sm:gap-12 w-full mx-auto">
+                <button onclick="switchTab('gangnam')" id="tab-btn-gangnam" class="tab-btn tab-active pb-3 sm:pb-4 text-base sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-1 sm:px-4 text-left sm:text-center">
                     서울 강남점
                 </button>
-                <button onclick="switchTab('yeongdeungpo')" id="tab-btn-yeongdeungpo" class="tab-btn tab-inactive pb-4 text-lg sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-2 sm:px-4 text-center">
+                <button onclick="switchTab('yeongdeungpo')" id="tab-btn-yeongdeungpo" class="tab-btn tab-inactive pb-3 sm:pb-4 text-base sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-1 sm:px-4 text-left sm:text-center">
                     서울 영등포점
                 </button>
-                <button onclick="switchTab('haeundae')" id="tab-btn-haeundae" class="tab-btn tab-inactive pb-4 text-lg sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-2 sm:px-4 text-center">
+                <button onclick="switchTab('haeundae')" id="tab-btn-haeundae" class="tab-btn tab-inactive pb-3 sm:pb-4 text-base sm:text-2xl font-display-lg tracking-wide border-b-2 transition-all whitespace-nowrap px-1 sm:px-4 text-left sm:text-center">
                     부산 해운대점
                 </button>
             </div>
@@ -150,7 +150,7 @@
     </section>
 
     <!-- Content Card Wrapper for Active Tab -->
-    <div id="store-content-container" class="space-y-28 sm:space-y-32">
+    <div id="store-content-container" class="space-y-8 sm:space-y-28">
 
         <!-- 2. Store Image Slider Section (매장 이미지 슬라이드) -->
         <section class="w-full">
@@ -176,8 +176,8 @@
         </section>
 
 
-        <!-- 3. Store Information Section (행 형태 텍스트 리스트 - 여백 확대) -->
-        <section class="w-full py-6 my-4">
+        <!-- 3. Store Information Section (행 형태 텍스트 리스트) -->
+        <section class="w-full py-2 sm:py-6 my-2 sm:my-4">
             <div class="space-y-8 text-primary">
                 
                 <!-- Row 1: 주소 -->
@@ -205,16 +205,15 @@
                             <span class="material-symbols-outlined text-lg sm:text-xl">schedule</span> 영업시간
                         </span>
                     </div>
-                    <div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <p class="text-base sm:text-lg font-semibold">
-                            <span>평일(월-금) 10:00 - 20:00</span>
-                            <span class="mx-3 text-outline-variant">|</span>
-                            <span>주말/공휴일 10:00 - 21:00</span>
-                            <span class="text-sm text-outline font-normal ml-3">(연중무휴)</span>
-                        </p>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold rounded-full shrink-0">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> 영업 중
-                        </span>
+                    <div class="flex-1">
+                        <div class="text-base sm:text-lg font-semibold flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 leading-relaxed">
+                            <span class="whitespace-nowrap">평일(월-금) 10:00 - 20:00</span>
+                            <span class="hidden sm:inline text-outline-variant">|</span>
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="whitespace-nowrap">주말/공휴일 10:00 - 21:00</span>
+                                <span class="text-sm text-outline font-normal">(연중무휴)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -310,8 +309,8 @@
                         <button onclick="mapZoomOut()" class="w-8 h-8 flex items-center justify-center hover:bg-surface-container text-primary font-bold">-</button>
                     </div>
 
-                    <!-- Map Brand Tag -->
-                    <div class="absolute top-4 left-4 z-20 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded border border-outline-variant/40 text-xs font-semibold text-primary flex items-center gap-1.5 shadow-sm">
+                    <!-- Map Brand Tag (Hidden on mobile) -->
+                    <div class="hidden sm:flex absolute top-4 left-4 z-20 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded border border-outline-variant/40 text-xs font-semibold text-primary items-center gap-1.5 shadow-sm">
                         <span class="material-symbols-outlined text-sm text-primary">pin_drop</span>
                         <span id="map-location-tag">서울 강남점 위치 지도</span>
                     </div>
